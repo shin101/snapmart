@@ -5,7 +5,7 @@ interface TextAreaProps {
   [key: string]: any;
 }
 
-const TextArea = ({ ...rest }: TextAreaProps) => {
+const TextArea: React.FC<TextAreaProps> = ({ ...rest }) => {
   return (
     <div>
       {" "}
