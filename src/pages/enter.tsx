@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { cls } from "../../libs/utils";
+import { cls } from "../../libs/client/utils";
 import Button from "../../components/button";
 import { useForm } from "react-hook-form";
 import Input from "../../components/input";
+import useMutation from "../../libs/client/useMutation";
 
 interface EnterForm {
   email?: string;
@@ -10,6 +11,8 @@ interface EnterForm {
 }
 
 export default function Enter() {
+  const [enter, { loading, data, error }] = useMutation("/api/users/enter");
+  const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, reset } = useForm<EnterForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
@@ -20,7 +23,14 @@ export default function Enter() {
     reset();
     setMethod("phone");
   };
-  const onValid = (data: EnterForm) => {};
+  const onValid = (data: EnterForm) => {
+    enter(data);
+    // setSubmitting(true);
+    // fetch("/api/users/enter", {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    // }).then(() => setSubmitting(false));
+  };
 
   return (
     <div className="mt-16 px-16">
@@ -78,7 +88,11 @@ export default function Enter() {
 
           <Button
             text={
-              method === "email" ? "Get login link" : "Get a one time password"
+              submitting
+                ? "Loading..."
+                : method === "email"
+                ? "Get login link"
+                : "Get a one time password"
             }
           />
         </form>
