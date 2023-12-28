@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../../../components/layout";
-import FloatingButton from "../../../components/floating-button";
+import Layout from "@components/layout";
+import FloatingButton from "@components/floating-button";
 
 const Stream = () => {
   return (

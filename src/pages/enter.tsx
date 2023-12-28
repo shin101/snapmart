@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { cls } from "../../libs/client/utils";
-import Button from "../../components/button";
+import { cls } from "@libs/client/utils";
+import Button from "@components/button";
 import { useForm } from "react-hook-form";
-import Input from "../../components/input";
-import useMutation from "../../libs/client/useMutation";
+import Input from "@components/input";
+import useMutation from "@libs/client/useMutation";
 
 interface EnterForm {
   email?: string;
@@ -33,7 +33,7 @@ export default function Enter() {
       <h3 className="text-4xl font-bold text-center"> Snapmart 🚀</h3>
       <div className="mt-16">
         <div className="flex flex-col items-center">
-          <h5 className="text-xl text-gray-500 font-medium">Log in using:</h5>
+          <h5 className="text-xl text-gray-500 font-medium">Log in with:</h5>
           <div className="grid  border-b w-full mt-8 grid-cols-2  bg-gray-50 ">
             <button
               className={cls(

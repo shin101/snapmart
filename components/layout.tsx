@@ -1,8 +1,8 @@
 import React from "react";
-import { cls } from "../libs/client/utils";
 import Link from "next/link";
-import TabBar from "@/pages/tab";
 import { useRouter } from "next/router";
+import { cls } from "@libs/client/utils";
+import TabBar from "src/pages/tab";
 
 interface LayoutProps {
   title?: string;

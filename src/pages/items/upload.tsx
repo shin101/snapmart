@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Input from "../../../components/input";
-import Button from "../../../components/button";
+import Input from "@components/input";
+import Button from "@components/button";
 
 const Upload: NextPage = () => {
   return (

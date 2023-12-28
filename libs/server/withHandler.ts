@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import React from "react";
 
 const withHandler = (
   method: "GET" | "POST" | "DELETE",
