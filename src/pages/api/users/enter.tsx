@@ -13,5 +13,6 @@ export default function handler(
   if (req.method !== "POST") {
     res.status(401).end();
   }
-  res.status(200).json({ name: "John Doe" });
+  console.log(req.body);
+  res.status(200).end();
 }
