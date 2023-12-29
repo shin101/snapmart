@@ -1,5 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
+export interface ResponseType {
+  ok: boolean;
+  [key: string]: any;
+}
+
 const withHandler = (
   method: "GET" | "POST" | "DELETE",
   fn: (req: NextApiRequest, res: NextApiResponse) => void
@@ -13,7 +18,7 @@ const withHandler = (
     } catch (error) {
       console.log(error);
       return res.status(500).json({ error });
-    }
+    } 
   };
 };
 
