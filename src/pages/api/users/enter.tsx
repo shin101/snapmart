@@ -1,8 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import Twilio from "twilio";
 import { client } from "@libs/server/client";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+const twilioClient = Twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 async function handler(
   req: NextApiRequest,
@@ -12,17 +14,7 @@ async function handler(
   const user = phone ? { phone } : email ? { email } : null;
   if (!user) return res.status(400).json({ ok: false });
   const payload = Math.floor(100000 + Math.random() * 900000) + "";
-  const token = await client.user.upsert({
-    where: {
-      ...user,
-    },
-    create: {
-      name: "Anonymous",
-      ...user,
-    },
-    update: {},
-  });
-  await client.token.create({
+  const token = await client.token.create({
     data: {
       payload,
       user: {
@@ -38,7 +30,15 @@ async function handler(
       },
     },
   });
-  console.log(token);
+
+  if (phone) {
+    const message = await twilioClient.messages.create({
+      messagingServiceSid: process.env.TWILIO_MSID,
+      to: process.env.MY_PHONE!,
+      body: `Your login token is ${payload}`,
+    });
+    console.log(message);
+  }
 
   return res.json({ ok: true });
 }
