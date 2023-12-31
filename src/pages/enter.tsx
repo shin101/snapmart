@@ -10,10 +10,23 @@ interface EnterForm {
   phone?: string;
 }
 
+interface TokenForm {
+  token: string;
+}
+
+interface MutationResult {
+  ok: boolean;
+}
+
 export default function Enter() {
-  const [enter, { loading, data, error }] = useMutation("/api/users/enter");
+  const [enter, { loading, data, error }] =
+    useMutation<MutationResult>("/api/users/enter");
+  const [confirmToken, { loading: tokenLoading, data: tokenData }] =
+    useMutation<MutationResult>("/api/users/confirm");
   const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, reset } = useForm<EnterForm>();
+  const { register: tokenRegister, handleSubmit: tokenHandleSubmit } =
+    useForm<TokenForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
     reset();
@@ -26,72 +39,103 @@ export default function Enter() {
   const onValid = (validForm: EnterForm) => {
     enter(validForm);
   };
-  console.log(loading, data, error);
+  const onTokenValid = (validForm: TokenForm) => {
+    if (tokenLoading) return;
+    confirmToken(validForm);
+  };
 
   return (
     <div className="mt-16 px-16">
       <h3 className="text-4xl font-bold text-center"> Snapmart 🚀</h3>
       <div className="mt-16">
-        <div className="flex flex-col items-center">
-          <h5 className="text-xl text-gray-500 font-medium">Log in with:</h5>
-          <div className="grid  border-b w-full mt-8 grid-cols-2  bg-gray-50 ">
-            <button
-              className={cls(
-                "pb-4 font-medium border-b-2 pt-4",
-                method === "email"
-                  ? "border-purple-500 text-purple-500 bg-purple-100 "
-                  : "border-transparent text-gray-500"
-              )}
-              onClick={onEmailClick}
-            >
-              Email
-            </button>
-            <button
-              className={cls(
-                "pb-4 font-medium border-b-2 pt-4",
-                method === "phone"
-                  ? "border-purple-500 text-purple-500 bg-purple-100"
-                  : "border-transparent text-gray-500"
-              )}
-              onClick={onPhoneClick}
-            >
-              Phone
-            </button>
-          </div>
-        </div>
-        <form onSubmit={handleSubmit(onValid)} className="flex flex-col mt-8">
-          <div className="mt-1 mb-3">
-            {method === "email" ? (
+        {data?.ok ? (
+          <form
+            onSubmit={tokenHandleSubmit(onTokenValid)}
+            className="flex flex-col mt-8"
+          >
+            <div className="mt-1 mb-3">
               <Input
-                register={register("email", { required: true })}
-                name="email"
-                label="Email Address"
-                type="email"
-                required
-              />
-            ) : null}
-            {method === "phone" ? (
-              <Input
-                register={register("phone", { required: true })}
-                name="phone"
-                label="Phone Number"
-                kind="phone"
+                register={tokenRegister("token", { required: true })}
+                name="token"
+                label="Confirmation Token"
                 type="number"
                 required
               />
-            ) : null}
-          </div>
+            </div>
 
-          <Button
-            text={
-              submitting
-                ? "Loading..."
-                : method === "email"
-                ? "Get login link"
-                : "Get a one time password"
-            }
-          />
-        </form>
+            <Button text={submitting ? "Loading..." : "Confirm Token"} />
+          </form>
+        ) : (
+          <>
+            {" "}
+            <div className="flex flex-col items-center">
+              <h5 className="text-xl text-gray-500 font-medium">
+                Log in with:
+              </h5>
+              <div className="grid  border-b w-full mt-8 grid-cols-2  bg-gray-50 ">
+                <button
+                  className={cls(
+                    "pb-4 font-medium border-b-2 pt-4",
+                    method === "email"
+                      ? "border-purple-500 text-purple-500 bg-purple-100 "
+                      : "border-transparent text-gray-500"
+                  )}
+                  onClick={onEmailClick}
+                >
+                  Email
+                </button>
+                <button
+                  className={cls(
+                    "pb-4 font-medium border-b-2 pt-4",
+                    method === "phone"
+                      ? "border-purple-500 text-purple-500 bg-purple-100"
+                      : "border-transparent text-gray-500"
+                  )}
+                  onClick={onPhoneClick}
+                >
+                  Phone
+                </button>
+              </div>
+            </div>
+            <form
+              onSubmit={handleSubmit(onValid)}
+              className="flex flex-col mt-8"
+            >
+              <div className="mt-1 mb-3">
+                {method === "email" ? (
+                  <Input
+                    register={register("email", { required: true })}
+                    name="email"
+                    label="Email Address"
+                    type="email"
+                    required
+                  />
+                ) : null}
+                {method === "phone" ? (
+                  <Input
+                    register={register("phone", { required: true })}
+                    name="phone"
+                    label="Phone Number"
+                    kind="phone"
+                    type="number"
+                    required
+                  />
+                ) : null}
+              </div>
+
+              <Button
+                text={
+                  submitting
+                    ? "Loading..."
+                    : method === "email"
+                    ? "Get login link"
+                    : "Get a one time password"
+                }
+              />
+            </form>
+          </>
+        )}
+
         <div className="mt-8">
           <div className="relative">
             <div className="absolute w-full border-t border-gray-300" />

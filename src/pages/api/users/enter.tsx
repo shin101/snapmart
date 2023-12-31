@@ -33,33 +33,37 @@ async function handler(
   });
 
   if (phone) {
-    const message = await twilioClient.messages.create({
-      messagingServiceSid: process.env.TWILIO_MSID,
-      to: process.env.MY_PHONE!,
-      body: `Your login token is ${payload}`,
-    });
-    console.log(message);
+    // UNCOMMENT BELOW AFTER DEPLOYING
+    // ---------------------------------------------
+    // const message = await twilioClient.messages.create({
+    //   messagingServiceSid: process.env.TWILIO_MSID,
+    //   to: process.env.MY_PHONE!,
+    //   body: `Your login token is ${payload}`,
+    // });
+    // console.log(message);
   } else if (email) {
-    const mailOptions = {
-      from: process.env.MAIL_ID,
-      to: email,
-      subject: "Snapmart Authentication Email",
-      text: `Authentication Code: ${payload}`,
-    };
-    const result = await smtpTransport.sendMail(
-      mailOptions,
-      (error, responses) => {
-        if (error) {
-          console.log(error);
-          return null;
-        } else {
-          console.log(responses);
-          return null;
-        }
-      }
-    );
-    smtpTransport.close();
-    console.log(result);
+    // UNCOMMENT BELOW AFTER DEPLOYING
+    // ---------------------------------------------
+    // const mailOptions = {
+    //   from: process.env.MAIL_ID,
+    //   to: email,
+    //   subject: "Snapmart Authentication Email",
+    //   text: `Authentication Code: ${payload}`,
+    // };
+    // const result = await smtpTransport.sendMail(
+    //   mailOptions,
+    //   (error, responses) => {
+    //     if (error) {
+    //       console.log(error);
+    //       return null;
+    //     } else {
+    //       console.log(responses);
+    //       return null;
+    //     }
+    //   }
+    // );
+    // smtpTransport.close();
+    // console.log(result);
   }
 
   return res.json({ ok: true });
