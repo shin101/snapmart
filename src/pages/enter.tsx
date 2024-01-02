@@ -4,6 +4,9 @@ import Button from "@components/button";
 import { useForm } from "react-hook-form";
 import Input from "@components/input";
 import useMutation from "@libs/client/useMutation";
+// dynamic allows lazy loading
+import dynamic from "next/dynamic";
+
 
 interface EnterForm {
   email?: string;
