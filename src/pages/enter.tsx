@@ -63,7 +63,7 @@ export default function Enter() {
               />
             </div>
 
-            <Button text={submitting ? "Loading..." : "Confirm Token"} />
+            <Button text={tokenLoading ? "Loading..." : "Confirm Token"} />
           </form>
         ) : (
           <>
