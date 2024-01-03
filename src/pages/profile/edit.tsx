@@ -16,6 +16,7 @@ const EditProfile = () => {
             >
               Change Photo
               <input
+              
                 id="picture"
                 type="file"
                 className="hidden"
@@ -24,7 +25,13 @@ const EditProfile = () => {
             </label>
           </div>
           <div className="space-y-1">
-            <Input label="Email Address" name="email" kind="text" required />
+            <Input
+              label="Email Address"
+              name="email"
+              kind="text"
+              required={false}
+              type="email"
+            />
             <Input label="Phone Number" name="phone" kind="phone" required />
           </div>
 

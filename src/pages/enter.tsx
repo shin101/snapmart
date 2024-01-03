@@ -7,7 +7,6 @@ import useMutation from "@libs/client/useMutation";
 // dynamic allows lazy loading
 import dynamic from "next/dynamic";
 
-
 interface EnterForm {
   email?: string;
   phone?: string;
@@ -26,7 +25,6 @@ export default function Enter() {
     useMutation<MutationResult>("/api/users/enter");
   const [confirmToken, { loading: tokenLoading, data: tokenData }] =
     useMutation<MutationResult>("/api/users/confirm");
-  const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, reset } = useForm<EnterForm>();
   const { register: tokenRegister, handleSubmit: tokenHandleSubmit } =
     useForm<TokenForm>();
@@ -39,7 +37,9 @@ export default function Enter() {
     reset();
     setMethod("phone");
   };
+
   const onValid = (validForm: EnterForm) => {
+    if (loading) return;
     enter(validForm);
   };
   const onTokenValid = (validForm: TokenForm) => {
@@ -128,7 +128,7 @@ export default function Enter() {
 
               <Button
                 text={
-                  submitting
+                  tokenLoading
                     ? "Loading..."
                     : method === "email"
                     ? "Get login link"
