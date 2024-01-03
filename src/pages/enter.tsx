@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cls } from "@libs/client/utils";
 import Button from "@components/button";
 import { useForm } from "react-hook-form";
@@ -6,6 +6,7 @@ import Input from "@components/input";
 import useMutation from "@libs/client/useMutation";
 // dynamic allows lazy loading
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 interface EnterForm {
   email?: string;
@@ -46,6 +47,12 @@ export default function Enter() {
     if (tokenLoading) return;
     confirmToken(validForm);
   };
+  const router = useRouter();
+  useEffect(() => {
+    if (tokenData?.ok) {
+      router.push("/");
+    }
+  }, [tokenData, router]);
 
   return (
     <div className="mt-16 px-16">
