@@ -4,8 +4,9 @@ import FloatingButton from "@components/floating-button";
 import useUser from "@libs/client/useUser";
 
 const Home: NextPage = () => {
-  const user = useUser();
-  console.log(user);
+  const { user, isLoading } = useUser();
+  console.log(user)
+
   return (
     <Layout title="Home" hasTabBar>
       <div className="py-16 px-4 space-y-8 divide-y">
