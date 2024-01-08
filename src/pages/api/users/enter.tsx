@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import Twilio from "twilio";
-import { client } from "@libs/server/client";
+import client from "@libs/server/client";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
 import type { NextApiRequest, NextApiResponse } from "next";
 import smtpTransport from "@libs/server/email";

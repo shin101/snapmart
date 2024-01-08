@@ -10,15 +10,19 @@ export const middleware = async (req: NextRequest, ev: NextFetchEvent) => {
   if (userAgent(req).isBot) {
     return new Response("Bots not allowed", { status: 403 });
   }
+
   const res = NextResponse.next();
 
+
   const session = await getIronSession(req, res, {
-    cookieName: "snapmart",
+    cookieName: process.env.COOKIE_NAME!,
     password: process.env.COOKIE_PW!,
     cookieOptions: {
       secure: process.env.NODE_ENV! === "production",
     },
   });
+
+  console.log(session)
 
   if (!session.user && !req.url.includes("/enter")) {
     req.nextUrl.searchParams.set("from", req.nextUrl.pathname);

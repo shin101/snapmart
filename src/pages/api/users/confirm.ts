@@ -1,6 +1,6 @@
 import withHandler, { ResponseType } from "@libs/server/withHandler";
 import { NextApiRequest, NextApiResponse } from "next";
-import client  from "@libs/server/client";
+import client from "@libs/server/client";
 import { withApiSession } from "@libs/server/withSession";
 
 async function handler(
@@ -8,6 +8,7 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { token } = req.body;
+
   const foundToken = await client.token.findUnique({
     where: { payload: token },
     include: { user: true },
