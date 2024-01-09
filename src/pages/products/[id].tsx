@@ -8,7 +8,7 @@ import Link from "next/link";
 const ItemDetail: NextPage = () => {
   const router = useRouter();
   const { data } = useSWR(
-    router.query.id ? `/api/products/${router.query.id}` : null
+    router.query.id ? `/api/products/${router.query.id}`  : null
   );
 
 

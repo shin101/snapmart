@@ -2,13 +2,19 @@ import type { NextPage } from "next";
 import Layout from "@components/layout";
 import FloatingButton from "@components/floating-button";
 import useUser from "@libs/client/useUser";
-import useSWR from "swr";
+import useSWR, { SWRConfig } from "swr";
 import Item from "@components/item";
 import { Product } from "@prisma/client";
+import client from "@libs/server/client";
 
+export interface ProductWithCount extends Product {
+  _count: {
+    favs: number;
+  };
+}
 interface ProductsResponse {
-  ok:boolean;
-  products: Product[]
+  ok: boolean;
+  products: Product[];
 }
 
 const Home: NextPage = () => {
@@ -19,19 +25,21 @@ const Home: NextPage = () => {
   return (
     <Layout title="Home" hasTabBar>
       <div className="py-16 px-4 space-y-8 divide-y">
-        {data?.products?.map((product) => (
-           <Item
-           id={product.id}
-           key={product.id}
-           title={product.name}
-           price={product.price}
-           comments={1}
-           hearts={1}
-         />
-        ))}
+        {data
+          ? data?.products?.map((product) => (
+              <Item
+                id={product.id}
+                key={product.id}
+                title={product.name}
+                price={product.price}
+                comments={1}
+                hearts={1}
+              />
+            ))
+          : "Loading"}
       </div>
 
-        {/* <FloatingButton href="/products/upload">
+      {/* <FloatingButton href="/products/upload">
           <svg
             className="h-6 w-6"
             xmlns="http://www.w3.org/2000/svg"
@@ -48,9 +56,27 @@ const Home: NextPage = () => {
             />
           </svg>
         </FloatingButton> */}
-
     </Layout>
   );
 };
 
-export default Home;
+const Page: NextPage<{ products: ProductWithCount[] }> = ({ products }) => {
+  return (
+    <SWRConfig
+      value={{ fallback: { "/api/products": { ok: true, products } } }}
+    >
+      <Home />
+    </SWRConfig>
+  );
+};
+
+export async function getServerSideProps() {
+  const products = await client.product.findMany({});
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products)),
+    },
+  };
+}
+
+export default Page;
