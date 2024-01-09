@@ -1,8 +1,13 @@
-import type { NextPage } from "next";
+import type { NextPage, NextPageContext } from "next";
 import Layout from "@components/layout";
 import Link from "next/link";
+import { SWRConfig } from "swr";
+import { withSsrSession } from "@libs/server/withSession";
+import client from "@libs/server/client";
+
 
 const Profile: NextPage = () => {
+
   return (
     <Layout title="Profile" hasTabBar>
       <div className="py-16 px-4 space-y-8">
@@ -150,4 +155,23 @@ const Profile: NextPage = () => {
   );
 };
 
-export default Profile;
+const Page: NextPage<{ profile: User }> = ({ profile }) => {
+  return (
+    <SWRConfig value={{ fallback: { "/api/users/me": { ok: true, profile } } }}>
+      <Profile />
+    </SWRConfig>
+  );
+};
+
+export const getServerSideProps = withSsrSession(async function ({
+  req,
+}: NextPageContext) {
+  const profile = await client?.user.findUnique({
+    where: { id: req?.session.user?.id },
+  });
+  return {
+    props: { profile: JSON.parse(JSON.stringify(profile)) },
+  };
+});
+
+export default Page;

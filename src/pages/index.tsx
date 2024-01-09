@@ -62,6 +62,7 @@ const Home: NextPage = () => {
 
 const Page: NextPage<{ products: ProductWithCount[] }> = ({ products }) => {
   return (
+    // fallback provides default values for cache using key-value obj
     <SWRConfig
       value={{ fallback: { "/api/products": { ok: true, products } } }}
     >
