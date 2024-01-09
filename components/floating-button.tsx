@@ -8,12 +8,22 @@ interface FloatingButtonProps {
 
 const FloatingButton = ({ children, href }: FloatingButtonProps) => {
   return (
-    <Link href={href}>
-      <button className="fixed hover:bg-purple-500 transition-colors cursor-pointer bottom-24 right-5 shadow-xl bg-purple-400 rounded-full p-4 text-white">
+    <div className="">
+    <button >
+      <Link href={href} className="">
         {children}
-      </button>
-    </Link>
-  );
-};
+      </Link>
+    </button>
+    </div>
 
-export default FloatingButton;
+    
+    );
+  };
+  
+  export default FloatingButton;
+  
+  // <Link href={href} className="">
+    {/* <button className=" hover:bg-purple-500 transition-colors cursor-pointer bottom-24 right-5 shadow-xl bg-purple-400 rounded-full p-4 text-white">
+      {children}
+    </button> */}
+

@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { cls } from "@libs/client/utils";
 import TabBar from "src/pages/tab";
+import FloatingButton from "./floating-button";
 
 interface LayoutProps {
   title?: string;
@@ -19,7 +20,7 @@ const Layout = ({ title, canGoBack, hasTabBar, children }: LayoutProps) => {
 
   return (
     <div>
-      <div className="bg-white w-full text-lg font-medium py-3 fixed text-gray-800 border-b top-0 left-0">
+      <div className="bg-white w-full text-lg font-medium py-3  text-gray-800 border-b top-0 left-0 fixed">
         {canGoBack ? (
           <button onClick={onClick}>
             <svg
@@ -42,7 +43,10 @@ const Layout = ({ title, canGoBack, hasTabBar, children }: LayoutProps) => {
           <span className="flex items-center justify-center ">{title}</span>
         ) : null}
       </div>
+
       <div className={cls("pt-16", hasTabBar ? "pb-16" : "")}> {children}</div>
+
+
       {hasTabBar ? <TabBar /> : null}
     </div>
   );
