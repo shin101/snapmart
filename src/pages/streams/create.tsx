@@ -1,3 +1,4 @@
+import Button from "@components/button";
 import type { NextPage } from "next";
 
 const Create: NextPage = () => {
@@ -54,9 +55,8 @@ const Create: NextPage = () => {
           rows={4}
         />
       </div>
-      <button className=" w-full bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 focus:outline-none ">
-        Go live
-      </button>
+
+      <Button text="Go Live" />
     </div>
   );
 };

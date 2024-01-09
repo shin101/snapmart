@@ -6,9 +6,11 @@ interface ButtonProps {
 
 const Button = ({ text }: ButtonProps) => {
   return (
-    <button className="flex-1 bg-purple-500 text-white py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 font-medium hover:bg-purple-600">
-      {text}
-    </button>
+    <div >
+      <button className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 focus:outline-none">
+        {text}
+      </button>
+    </div>
   );
 };
 

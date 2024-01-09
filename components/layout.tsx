@@ -20,24 +20,27 @@ const Layout = ({ title, canGoBack, hasTabBar, children }: LayoutProps) => {
 
   return (
     <div>
-      <div className="bg-white w-full text-lg font-medium py-3  text-gray-800 border-b top-0 left-0 fixed">
+      <div className="bg-white w-full text-lg font-medium py-3 text-gray-800 border-b top-0 fixed">
         {canGoBack ? (
-          <button onClick={onClick}>
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 19l-7-7 7-7"
-              ></path>
-            </svg>
-          </button>
+          <span className="px-10">
+            <button onClick={onClick}>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 19l-7-7 7-7"
+                ></path>
+              </svg>
+              Back
+            </button>
+          </span>
         ) : null}
         {title ? (
           <span className="flex items-center justify-center ">{title}</span>
@@ -45,7 +48,6 @@ const Layout = ({ title, canGoBack, hasTabBar, children }: LayoutProps) => {
       </div>
 
       <div className={cls("pt-16", hasTabBar ? "pb-16" : "")}> {children}</div>
-
 
       {hasTabBar ? <TabBar /> : null}
     </div>
