@@ -163,6 +163,7 @@ const Page: NextPage<{ profile: User }> = ({ profile }) => {
   );
 };
 
+//  getServerSideProps : 유저의 요청이 발생할 때마다 일어남
 export const getServerSideProps = withSsrSession(async function ({
   req,
 }: NextPageContext) {
