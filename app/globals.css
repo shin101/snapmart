@@ -9,3 +9,9 @@
 		underline-offset-4
 	}
 }
+
+@layer components {
+	.primary-btn {
+		@apply w-full bg-gradient-to-tr from-pink-300 via-blue-200 to-purple-200 text-white font-medium rounded-md text-center transition-colors
+	}
+}

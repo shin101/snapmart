@@ -11,7 +11,7 @@ export default function Home() {
       <div className="flex flex-col items-center gap-3 w-full">
         <Link
           href="/create-account"
-          className="w-full bg-gradient-to-tr from-pink-300 via-blue-200 to-purple-300 text-white text-lg font-medium py-2.5 rounded-md text-center transition-colors"
+          className="primary-btn text-lg py-2.5"
         >
           Get started
         </Link>
