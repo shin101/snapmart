@@ -2,10 +2,13 @@ import FormButton from "@/components/form-btn";
 import FormInput from "@/components/form-input";
 import SocialLogin from "@/components/social-login";
 
+
 export default function Login() {
   const handleForm = async (formData: FormData) => {
     "use server";
-    console.log(formData.get("email"), formData.get("password"));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+    // console.log(formData.get("email"), formData.get("password"));
+    
   };
   return (
     <div className="flex flex-col gap-10 py-8 px-6">
@@ -28,7 +31,7 @@ export default function Login() {
           required
           errors={[]}
         />
-        <FormButton text="Log In" loading={false} />
+        <FormButton text="Log In" />
       </form>
       <SocialLogin />
     </div>
