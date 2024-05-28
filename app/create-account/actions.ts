@@ -1,10 +1,37 @@
 "use server";
+import bcrypt from "bcrypt";
 import { z } from "zod";
 import {
   PASSWORD_MIN_LENGTH,
   PASSWORD_REGEX,
   PASSWORD_REGEX_ERROR,
 } from "../lib/constants";
+import db from "../lib/db";
+
+const checkUniqueUsername = async (username: string) => {
+  const user = await db.user.findUnique({
+    where: {
+      username,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  return !Boolean(user);
+};
+
+const checkUniqueEmail = async (email: string) => {
+  const user = await db.user.findUnique({
+    where: {
+      email,
+    },
+    select: {
+      id: true,
+    },
+  });
+  return !Boolean(user);
+};
 
 const formSchema = z
   .object({
@@ -14,8 +41,16 @@ const formSchema = z
         required_error: "Username is required.",
       })
       .toLowerCase()
-      .trim(),
-    email: z.string().email().toLowerCase(),
+      .trim()
+      .refine(checkUniqueUsername, "This username is already taken"),
+    email: z
+      .string()
+      .email()
+      .toLowerCase()
+      .refine(
+        checkUniqueEmail,
+        "There is an existing account associated with this email"
+      ),
     password: z
       .string()
       .min(PASSWORD_MIN_LENGTH)
@@ -34,10 +69,27 @@ export async function createAccount(prevState: any, formData: FormData) {
     password: formData.get("password"),
     confirm_password: formData.get("confirm_password"),
   };
-  const result = formSchema.safeParse(data);
+  const result = await formSchema.safeParseAsync(data);
   if (!result.success) {
     return result.error.flatten();
   } else {
-    console.log(result.data);
+    // hash password
+    const hashedPassword = await bcrypt.hash(result.data.password, 12);
+
+    // save the user to db
+    const user = await db.user.create({
+      data: {
+        username: result.data.username,
+        email: result.data.email,
+        password: hashedPassword,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    // log the user in
+
+    // redirect to "/home"
   }
 }
