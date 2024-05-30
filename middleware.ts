@@ -11,6 +11,8 @@ const publicOnlyUrls: Routes = {
   "/login": true,
   "/sms": true,
   "/create-account": true,
+  "/github/start": true,
+  "/github/complete": true,
 };
 
 export async function middleware(request: NextRequest) {
@@ -20,9 +22,9 @@ export async function middleware(request: NextRequest) {
     if (!exists) {
       return NextResponse.redirect(new URL("/", request.url));
     } else {
-      if (exists) {
-        return NextResponse.redirect(new URL("/products", request.url));
-      }
+      //   if (exists) {
+      //     return NextResponse.redirect(new URL("/profile", request.url));
+      //   }
     }
   }
 }
