@@ -8,7 +8,7 @@ import {
 } from "../lib/constants";
 import db from "../lib/db";
 import { redirect } from "next/navigation";
-import getSession from "../lib/session";
+import { getSession, logUserIn } from "../lib/session";
 
 const formSchema = z
   .object({
@@ -92,9 +92,6 @@ export async function createAccount(prevState: any, formData: FormData) {
     });
 
     // log the user in
-    const session = await getSession();
-    session.id = user.id;
-    await session.save();
-    redirect("/profile");
+    logUserIn(user.id);
   }
 }

@@ -1,12 +1,19 @@
 import db from "@/app/lib/db";
-import getSession from "@/app/lib/session";
+import { logUserIn, getSession } from "@/app/lib/session";
 import { notFound, redirect } from "next/navigation";
 import { NextRequest } from "next/server";
+
+type EmailData = {
+  email: string;
+  primary: boolean;
+  verified: boolean;
+  visibility: string | null;
+};
 
 export async function GET(request: NextRequest) {
   const code = request.nextUrl.searchParams.get("code");
   if (!code) {
-    return notFound();
+    return new Response(null, { status: 400 });
   }
   const accessTokenParams = new URLSearchParams({
     client_id: process.env.GITHUB_CLIENT_ID!,
@@ -25,12 +32,18 @@ export async function GET(request: NextRequest) {
     return new Response(null, { status: 400 });
   }
 
-  const userProfileResponse = await fetch("https://api.github.com/user", {
+  const getGithubProfile = await fetch("https://api.github.com/user", {
     headers: { Authorization: `Bearer ${access_token}` },
     cache: "no-cache",
   });
 
-  const { id, avatar_url, login } = await userProfileResponse.json();
+  const getGithubEmail = await fetch("https://api.github.com/user/emails", {
+    headers: { Authorization: `Bearer ${access_token}` },
+    cache: "no-cache",
+  });
+
+  const { id, avatar_url, login } = await getGithubProfile.json();
+  const emailData: EmailData[] = await getGithubEmail.json();
   const user = await db.user.findUnique({
     where: {
       github_id: id + "",
@@ -41,19 +54,27 @@ export async function GET(request: NextRequest) {
   });
 
   if (user) {
-    const session = await getSession();
-    session.id = user.id;
-    await session.save();
-    return redirect("/profile");
+    return logUserIn(user.id);
   }
+
+  const usernameExists = await db.user.findUnique({
+    where: {
+      username: login,
+    },
+  });
+
   const newUser = await db.user.create({
-    data: { username: login, github_id: id + "", avatar: avatar_url },
+    data: {
+      username: usernameExists ? `${login}-gh` : login,
+      github_id: id + "",
+      avatar: avatar_url,
+      email: emailData?.find(
+        (userEmail) => userEmail.primary && userEmail.verified
+      )?.email,
+    },
     select: {
       id: true,
     },
   });
-  const session = await getSession();
-  session.id = newUser.id;
-  await session.save();
-  return redirect("/profile");
+  return logUserIn(newUser.id);
 }
