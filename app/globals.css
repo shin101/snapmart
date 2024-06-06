@@ -5,13 +5,13 @@
 
 @layer base {
 	a {
-		@apply text-blue-300
+		@apply text-purple-400
 		underline-offset-4
 	}
 }
 
 @layer components {
 	.primary-btn {
-		@apply w-full bg-gradient-to-tr from-pink-300 via-blue-200 to-purple-200 text-white font-medium rounded-md text-center transition-colors
+		@apply w-full bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-purple-400 font-medium  text-purple-400 rounded-md text-center transition-colors
 	}
 }

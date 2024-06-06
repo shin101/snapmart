@@ -2,7 +2,6 @@ export function formatToUSD(price: number): string {
   return price.toLocaleString();
 }
 
-import React from "react";
 
 export function formatToTimeAgo(date: string): string {
   const dayInMs = 1000 * 60 * 60 * 24;

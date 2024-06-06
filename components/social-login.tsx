@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/solid";
+import Button from "./button";
 
 export default function SocialLogin() {
   return (
@@ -23,7 +24,7 @@ export default function SocialLogin() {
               clipRule="evenodd"
             ></path>
           </svg>
-          <span>Continue with Github</span>
+          <span >Continue with Github</span>
         </Link>
         <Link
           className="primary-btn flex h-10 items-center justify-center gap-2"
@@ -32,7 +33,7 @@ export default function SocialLogin() {
           <span>
             <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" />
           </span>
-          <span>Continue with SMS</span>
+          <span >Continue with SMS</span>
         </Link>
       </div>
     </>
