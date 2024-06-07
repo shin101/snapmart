@@ -13,10 +13,17 @@ interface ProductListProps {
 export const ProductList = ({ initialProducts }: ProductListProps) => {
   const [products, setProducts] = useState(initialProducts);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
   const loadMoreProducts = async () => {
     setIsLoading(true);
-    const newProducts = await getMoreProducts(1);
-    setProducts((prev) => [...prev, ...newProducts]);
+    const newProducts = await getMoreProducts(page + 1);
+    if (newProducts.length !== 0) {
+      setPage((prev) => prev + 1);
+      setProducts((prev) => [...prev, ...newProducts]);
+    } else {
+      setIsLastPage(true);
+    }
     setIsLoading(false);
   };
   return (
@@ -24,13 +31,15 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
       {products.map((product) => (
         <ListProduct key={product.id} {...product} />
       ))}
-      <button
-        onClick={loadMoreProducts}
-        disabled={isLoading}
-        className="text-sm font-semibold bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-t-purple-400 w-fit mx-auto px-3 "
-      >
-        {isLoading ? "Loading..." : "Load more"}
-      </button>
+      {isLastPage ? null : (
+        <button
+          onClick={loadMoreProducts}
+          disabled={isLoading}
+          className="text-sm font-semibold bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-purple-400 rounded-md w-fit mx-auto px-3 "
+        >
+          {isLoading ? "Loading..." : "Load more"}
+        </button>
+      )}
     </div>
   );
 };
