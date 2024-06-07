@@ -19,8 +19,8 @@ function ListProduct({
 }: ListProductProps) {
   return (
     <Link href={`/products/${id}`} className="flex gap-5">
-      <div>
-        <Image width={200} height={200} src={photo} alt={title}></Image>
+      <div className="relative size-28 rounded-md overflow-hidden">
+        <Image fill className="object-cover" src={photo} alt={title}></Image>
       </div>
       <div className="flex flex-col gap-1">
         <span className="text-lg">{title}</span>
