@@ -14,7 +14,7 @@ export default function Input({
     <div className="flex flex-col gap-2">
       <input
         name={name}
-        className="bg-transparent rounded-md w-full h-10 focus:outline-none ring-2 focus:ring-4 ring-neutral-200 focus:ring-purple-300 border-none placeholder:text-neutral-400 transition"
+        className="px-2 bg-transparent rounded-md w-full h-10 focus:outline-none ring-2 focus:ring-4 ring-neutral-200 focus:ring-purple-300 border-none placeholder:text-neutral-400 transition"
         {...rest}
       />
 
