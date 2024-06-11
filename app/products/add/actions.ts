@@ -1,8 +1,6 @@
 "use server";
 
 import { z } from "zod";
-import fs from "fs/promises";
-import { File } from "@web-std/file";
 import db from "@/app/lib/db";
 import { getSession } from "@/app/lib/session";
 import { redirect } from "next/navigation";
@@ -16,18 +14,14 @@ const productSchema = z.object({
   price: z.coerce.number({ required_error: "Number is required" }),
 });
 
-const uploadProduct = async (_:any, formData: FormData) => {
+const uploadProduct = async (_: any, formData: FormData) => {
   const data = {
     photo: formData.get("photo"),
     title: formData.get("title"),
     price: formData.get("price"),
     description: formData.get("description"),
   };
-  if (data.photo instanceof File) {
-    const photoData = await data.photo.arrayBuffer();
-    await fs.appendFile(`./public/${data.photo.name}`, Buffer.from(photoData));
-    data.photo = `/${data.photo.name}`;
-  }
+
   const result = productSchema.safeParse(data);
   if (!result.success) {
     return result.error.flatten();
@@ -55,4 +49,16 @@ const uploadProduct = async (_:any, formData: FormData) => {
   }
 };
 
-export default uploadProduct;
+const getUploadURL = async () => {
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCT_ID}/images/v2/direct_upload`,
+    {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.CLOUDFLARE_API}` },
+    }
+  );
+  const data = await response.json();
+  return data;
+};
+
+export { uploadProduct, getUploadURL };

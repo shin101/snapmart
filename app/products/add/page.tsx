@@ -4,12 +4,13 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import uploadProduct from "./actions";
+import uploadProduct, { getUploadURL } from "./actions";
 import { useFormState } from "react-dom";
 
 const AddProduct = () => {
   const [preview, setPreview] = useState("");
-  const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [uploadURL, setUploadURL] = useState("");
+  const onImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { files },
     } = event;
@@ -19,6 +20,11 @@ const AddProduct = () => {
     const file = files[0];
     const url = URL.createObjectURL(file);
     setPreview(url);
+    const { success, result } = await getUploadURL();
+    if (success) {
+      const { id, uploadURL } = result;
+      setUploadURL(uploadURL);
+    }
 
     if (file.size > 1024 * 1024 * 4) {
       return { error: "Please upload an image smaller than 4MB" };
