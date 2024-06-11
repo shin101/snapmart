@@ -4,12 +4,13 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import uploadProduct, { getUploadURL } from "./actions";
+import { getUploadURL, uploadProduct } from "./actions";
 import { useFormState } from "react-dom";
 
 const AddProduct = () => {
   const [preview, setPreview] = useState("");
   const [uploadURL, setUploadURL] = useState("");
+  const [photoId, setPhotoId] = useState("");
   const onImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { files },
@@ -24,13 +25,33 @@ const AddProduct = () => {
     if (success) {
       const { id, uploadURL } = result;
       setUploadURL(uploadURL);
+      setPhotoId(id);
     }
 
     if (file.size > 1024 * 1024 * 4) {
       return { error: "Please upload an image smaller than 4MB" };
     }
   };
-  const [state, action] = useFormState(uploadProduct, null);
+  const interceptAction = async (_: any, formData: FormData) => {
+    const file = formData.get("photo");
+    if (!file) {
+      return;
+    }
+    const cloudflareForm = new FormData();
+    cloudflareForm.append("file", file);
+    const response = await fetch(uploadURL, {
+      method: "POST",
+      body: cloudflareForm,
+    });
+    if (response.status !== 200) {
+      return;
+    }
+    const photoURL = `https://imagedelivery.net/3g1eFcBpThtQ1-GLTJihVg/${photoId}`;
+    formData.set("photo", photoURL);
+    return uploadProduct(_, formData);
+  };
+
+  const [state, action] = useFormState(interceptAction, null);
   return (
     <div>
       <form action={action} className="p-5 flex flex-col gap-5">
