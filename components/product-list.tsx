@@ -45,7 +45,7 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
     return () => {
       observer.disconnect();
     };
-  }, [page]);
+  }, [page])
 
   return (
     <div className="p-5 flex flex-col gap-5">

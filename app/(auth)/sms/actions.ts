@@ -1,8 +1,10 @@
 "use server";
 
+import crypto from "crypto";
 import { z } from "zod";
 import validator from "validator";
 import { redirect } from "next/navigation";
+import db from "@/app/lib/db";
 
 const phoneSchema = z
   .string()
@@ -14,7 +16,25 @@ interface ActionState {
   token: boolean;
 }
 
-export async function smsLogIn(prevState: ActionState, formData: FormData) {
+const getToken = async () => {
+  const token = crypto.randomInt(100000, 999999).toString();
+  const exists = await db.sMSToken.findUnique({
+    where: {
+      token,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (exists) {
+    return getToken();
+  } else {
+    return token;
+  }
+};
+
+const smsLogIn = async (prevState: ActionState, formData: FormData) => {
   const phone = formData.get("phone");
   const token = formData.get("token");
 
@@ -27,6 +47,36 @@ export async function smsLogIn(prevState: ActionState, formData: FormData) {
         error: result.error.flatten(),
       };
     } else {
+      // delete existing tokens
+      await db.sMSToken.deleteMany({
+        where: {
+          user: {
+            phone: result.data,
+          },
+        },
+      });
+
+      // create token
+      const token = await getToken();
+	  
+      await db.sMSToken.create({
+        data: {
+          token,
+          user: {
+            connectOrCreate: {
+              where: {
+                phone: result.data,
+              },
+              create: {
+                username: crypto.randomBytes(10).toString("hex"),
+                phone: result.data,
+              },
+            },
+          },
+        },
+      });
+
+      // send token with twilio
       return { token: true };
     }
   } else {
@@ -40,4 +90,6 @@ export async function smsLogIn(prevState: ActionState, formData: FormData) {
       redirect("/");
     }
   }
-}
+};
+
+export { smsLogIn };
