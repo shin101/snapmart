@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import ListProduct from "./list-product";
-import { InitialProducts } from "@/app/(tabs)/products/page"; 
-import getMoreProducts from "@/app/(tabs)/products/actions";
+import { InitialProducts } from "@/app/(tabs)/home/page";
+import getMoreProducts from "@/app/(tabs)/home/actions";
 
 interface ProductListProps {
   initialProducts: InitialProducts;
@@ -45,7 +45,7 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
     return () => {
       observer.disconnect();
     };
-  }, [page])
+  }, [page]);
 
   return (
     <div className="p-5 flex flex-col gap-5">
