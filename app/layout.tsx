@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: { template: "snapmart", default: "snapmart" },
+  title: { template: "%s | snapmart", default: "snapmart" },
   description: "Buy and sell everything",
 };
 
