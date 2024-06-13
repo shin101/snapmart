@@ -3,6 +3,9 @@ import { ProductList } from "@/components/product-list";
 import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { PlusIcon } from "@heroicons/react/24/solid";
+import { unstable_cache } from "next/cache";
+
+const getCachedProducts = unstable_cache(getInitialProducts, ["home-products"]);
 
 async function getInitialProducts() {
   const products = await db.product.findMany({
@@ -13,7 +16,8 @@ async function getInitialProducts() {
       photo: true,
       id: true,
     },
-    take: 1,
+    // uncomment below to enable infinite scroll
+    // take: 1,
     orderBy: {
       created_at: "desc",
     },
@@ -26,7 +30,7 @@ export type InitialProducts = Prisma.PromiseReturnType<
 >;
 
 export default async function Products() {
-  const initialProducts = await getInitialProducts();
+  const initialProducts = await getCachedProducts();
   return (
     <div>
       <ProductList initialProducts={initialProducts} />

@@ -52,14 +52,17 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
       {products.map((product) => (
         <ListProduct key={product.id} {...product} />
       ))}
-      {!isLastPage ? (
+
+{/* uncomment to enable infinite scroll functionality below */}
+
+      {/* {!isLastPage ? (
         <span
           ref={trigger}
           className="text-sm font-semibold bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-purple-400 rounded-md w-fit mx-auto px-3 "
         >
           {isLoading ? "Loading..." : "Load more"}
         </span>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

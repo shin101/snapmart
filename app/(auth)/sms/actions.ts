@@ -5,12 +5,30 @@ import { z } from "zod";
 import validator from "validator";
 import { redirect } from "next/navigation";
 import db from "@/app/lib/db";
+import { getSession } from "@/app/lib/session";
 
 const phoneSchema = z
   .string()
   .trim()
   .refine(validator.isMobilePhone, "Wrong phone format");
-const tokenSchema = z.coerce.number().min(100000).max(999999);
+
+async function tokenExists(token: number) {
+  const exists = await db.sMSToken.findUnique({
+    where: {
+      token: token.toString(),
+    },
+    select: {
+      id: true,
+    },
+  });
+  return Boolean(exists);
+}
+
+const tokenSchema = z.coerce
+  .number()
+  .min(100000)
+  .max(999999)
+  .refine(tokenExists, "This token does not exist");
 
 interface ActionState {
   token: boolean;
@@ -58,7 +76,7 @@ const smsLogIn = async (prevState: ActionState, formData: FormData) => {
 
       // create token
       const token = await getToken();
-	  
+
       await db.sMSToken.create({
         data: {
           token,
@@ -80,14 +98,35 @@ const smsLogIn = async (prevState: ActionState, formData: FormData) => {
       return { token: true };
     }
   } else {
-    const result = tokenSchema.safeParse(token);
+    const result = await tokenSchema.safeParseAsync(token);
     if (!result.success) {
       return {
         token: true,
         error: result.error.flatten(),
       };
     } else {
-      redirect("/");
+      // get the userId of token
+      const token = await db.sMSToken.findUnique({
+        where: {
+          token: result.data.toString(),
+        },
+        select: {
+          id: true,
+          userId: true,
+        },
+      });
+
+      const session = await getSession();
+      session.id = token!.userId;
+      await session.save();
+      await db.sMSToken.delete({
+        where: {
+          id: token!.id,
+        },
+      });
+
+      // log the user in
+      redirect("/profile");
     }
   }
 };
