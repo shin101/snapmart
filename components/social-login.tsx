@@ -24,9 +24,12 @@ export default function SocialLogin() {
               clipRule="evenodd"
             ></path>
           </svg>
-          <span >Continue with Github</span>
+          <span>Continue with Github</span>
         </Link>
-        <Link
+
+        {/* Temporarily disabling option to login with SMS bc i dont wanna pay for Twilio... */}
+
+        {/* <Link
           className="primary-btn flex h-10 items-center justify-center gap-2"
           href="/sms"
         >
@@ -34,7 +37,7 @@ export default function SocialLogin() {
             <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" />
           </span>
           <span >Continue with SMS</span>
-        </Link>
+        </Link> */}
       </div>
     </>
   );
