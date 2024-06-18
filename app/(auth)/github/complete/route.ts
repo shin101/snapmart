@@ -1,5 +1,5 @@
-import db from "@/app/lib/db";
-import { logUserIn, getSession } from "@/app/lib/session";
+import db from "@/lib/db";
+import { logUserIn, getSession } from "@/lib/session";
 import { notFound, redirect } from "next/navigation";
 import { NextRequest } from "next/server";
 

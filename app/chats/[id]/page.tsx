@@ -1,5 +1,5 @@
-import db from "@/app/lib/db";
-import { getSession } from "@/app/lib/session";
+import db from "@/lib/db";
+import { getSession } from "@/lib/session";
 import ChatMessagesList from "@/components/chat-messages-list";
 import { Prisma } from "@prisma/client";
 import { notFound } from "next/navigation";

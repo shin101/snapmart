@@ -1,5 +1,5 @@
 "use server";
-import db from "@/app/lib/db";
+import db from "@/lib/db";
 
 const getMoreProducts = async (page: number) => {
   const products = await db.product.findMany({

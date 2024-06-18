@@ -1,4 +1,5 @@
 import { getIronSession } from "iron-session";
+import { isRedirectError } from "next/dist/client/components/redirect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -13,7 +14,7 @@ export function getSession() {
   });
 }
 
-export async function logUserIn (userId: number) {
+export async function logUserIn(userId: number) {
   const session = await getSession();
   session.id = userId;
   await session.save();

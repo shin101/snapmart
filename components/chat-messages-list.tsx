@@ -1,7 +1,7 @@
 "use client";
 
 import { InitialChatMessages } from "@/app/chats/[id]/page";
-import { formatToTimeAgo } from "@/app/lib/utils";
+import { formatToTimeAgo } from "@/lib/utils";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/solid";
 import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 import Image from "next/image";
@@ -54,9 +54,7 @@ export default function ChatMessagesList({
           </div>
         </div>
       ))}
-      <form
-        className="flex relative"
-      >
+      <form className="flex relative">
         <input
           required
           className="bg-transparent rounded-full w-full h-10 focus:outline-none px-5 ring-2 focus:ring-4 transition ring-neutral-200 focus:ring-neutral-50 border-none placeholder:text-neutral-400"

@@ -1,10 +1,10 @@
-import db from "@/app/lib/db";
+import db from "@/lib/db";
 import { notFound } from "next/navigation";
 import { EyeIcon, HandThumbUpIcon } from "@heroicons/react/24/solid";
 import { HandThumbUpIcon as OutlineHandThumbUpIcon } from "@heroicons/react/24/outline";
-import { formatToTimeAgo } from "@/app/lib/utils";
+import { formatToTimeAgo } from "@/lib/utils";
 import Image from "next/image";
-import { getSession } from "@/app/lib/session";
+import { getSession } from "@/lib/session";
 import { revalidateTag, unstable_cache } from "next/cache";
 
 async function getPost(id: number) {
@@ -41,7 +41,7 @@ const getCachedPost = unstable_cache(getPost, ["post-detail"], {
   revalidate: 60,
 });
 
-async function getLikeStatus(postId: number, userId:number) {
+async function getLikeStatus(postId: number, userId: number) {
   //   const session = await getSession();
   const isLiked = await db.like.findUnique({
     where: {

@@ -5,10 +5,10 @@ import {
   PASSWORD_MIN_LENGTH,
   PASSWORD_REGEX,
   PASSWORD_REGEX_ERROR,
-} from "../../lib/constants";
-import db from "../../lib/db";
+} from "../../../lib/constants";
+import db from "../../../lib/db";
 import { redirect } from "next/navigation";
-import { getSession, logUserIn } from "../../lib/session";
+import { getSession, logUserIn } from "../../../lib/session";
 
 const formSchema = z
   .object({
@@ -85,6 +85,7 @@ export async function createAccount(prevState: any, formData: FormData) {
         username: result.data.username,
         email: result.data.email,
         password: hashedPassword,
+        avatar: "/default.jpg",
       },
       select: {
         id: true,

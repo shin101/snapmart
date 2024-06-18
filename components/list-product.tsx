@@ -1,4 +1,4 @@
-import { formatToTimeAgo, formatToUSD } from "@/app/lib/utils";
+import { formatToTimeAgo, formatToUSD } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 

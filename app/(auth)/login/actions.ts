@@ -3,13 +3,14 @@
 import bcrypt from "bcrypt";
 
 import { z } from "zod";
-import db from "@/app/lib/db";
-import { logUserIn } from "@/app/lib/session";
+import db from "@/lib/db";
+import { getSession, logUserIn } from "@/lib/session";
 import {
   PASSWORD_MIN_LENGTH,
   PASSWORD_REGEX,
   PASSWORD_REGEX_ERROR,
-} from "@/app/lib/constants";
+} from "@/lib/constants";
+import { redirect } from "next/navigation";
 
 const checkEmailExists = async (email: string) => {
   const user = await db.user.findUnique({
@@ -54,7 +55,10 @@ export const login = async (prevState: any, formData: FormData) => {
     });
     const ok = await bcrypt.compare(result.data.password, user!.password ?? "");
     if (ok) {
-      logUserIn(user!.id);
+		const session = await getSession();
+		session.id = user!.id;
+		await session.save();
+		redirect("/profile");
     } else {
       return {
         fieldErrors: {
