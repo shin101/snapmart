@@ -12,8 +12,8 @@ export default function CreateAccount() {
   return (
     <div className="flex flex-col gap-10 py-8 px-6">
       <div className="flex flex-col gap-2 *:font-medium">
-        <h1 className="text-2xl">Welcome</h1>
-        <h2 className="text-xl">Sign up today.</h2>
+        <h1 className="text-2xl text-gray-500">Welcome</h1>
+        <h2 className="text-xl text-gray-500">Sign up today.</h2>
       </div>
       <form action={dispatch} className="flex flex-col gap-3">
         <Input

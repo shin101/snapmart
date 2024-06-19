@@ -61,7 +61,7 @@ export default async function ChatRoom({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <ChatMessagesList initialMessages={initialMessages} userId={session.id} />
+      <ChatMessagesList chatRoomId={params.id}  initialMessages={initialMessages} userId={session.id!} />
     </div>
   );
 }

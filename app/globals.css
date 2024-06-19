@@ -12,6 +12,6 @@
 
 @layer components {
 	.primary-btn {
-		@apply w-full bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-purple-400 font-medium  text-purple-400 rounded-md text-center transition-colors
+		@apply w-full hover:bg-gradient-to-tr hover:from-pink-100 hover:via-white hover:to-purple-200 hover:border-purple-400 border border-purple-400 font-medium  text-purple-400 rounded-md text-center transition-colors
 	}
 }

@@ -6,8 +6,8 @@ export default function Home() {
     <div className="flex flex-col items-center justify-between min-h-screen p-6">
       <div className="my-auto flex flex-col items-center gap-2 *:font-medium">
         <span className="text-9xl">🚀</span>
-        <h1 className="text-4xl ">Snapmart</h1>
-        <h2 className="text-2xl">Welcome to Snapmart</h2>
+        <h1 className="text-4xl text-gray-500">Snapmart</h1>
+        <h2 className="text-2xl text-gray-400">Welcome to Snapmart</h2>
       </div>
       <div className="flex flex-col items-center gap-3 w-full">
         <Link href="/create-account" className="primary-btn text-lg py-2.5">
