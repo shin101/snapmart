@@ -34,7 +34,7 @@ interface ActionState {
   token: boolean;
 }
 
-const getToken = async () => {
+const getToken: () => Promise<string> = async () => {
   const token = crypto.randomInt(100000, 999999).toString();
   const exists = await db.sMSToken.findUnique({
     where: {
