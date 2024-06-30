@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import ListProduct from "./list-product";
-import { InitialProducts } from "@/app/(tabs)/home/page";
-import getMoreProducts from "@/app/(tabs)/home/actions";
+import { InitialProducts } from "@/app/(tabs)/products/page";
+import getMoreProducts from "@/app/(tabs)/products/actions";
 
 interface ProductListProps {
   initialProducts: InitialProducts;
@@ -53,7 +53,7 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
         <ListProduct key={product.id} {...product} />
       ))}
 
-{/* uncomment to enable infinite scroll functionality below */}
+      {/* uncomment to enable infinite scroll functionality below */}
 
       {/* {!isLastPage ? (
         <span
