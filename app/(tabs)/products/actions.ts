@@ -10,8 +10,8 @@ const getMoreProducts = async (page: number) => {
       photo: true,
       id: true,
     },
-    skip: page * 1,
-    take: 1,
+    skip: page * 5,
+    take: 5,
     orderBy: {
       created_at: "desc",
     },

@@ -26,6 +26,9 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
           observer.unobserve(trigger.current);
           setIsLoading(true);
           const newProducts = await getMoreProducts(page + 1);
+
+		  console.log('>>>', newProducts)
+
           if (newProducts.length !== 0) {
             setPage((prev) => prev + 1);
             setProducts((prev) => [...prev, ...newProducts]);
@@ -55,14 +58,14 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
 
       {/* uncomment to enable infinite scroll functionality below */}
 
-      {/* {!isLastPage ? (
+      {!isLastPage ? (
         <span
           ref={trigger}
           className="text-sm font-semibold bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-purple-400 rounded-md w-fit mx-auto px-3 "
         >
           {isLoading ? "Loading..." : "Load more"}
         </span>
-      ) : null} */}
+      ) : null}
     </div>
   );
 };

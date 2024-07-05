@@ -17,7 +17,7 @@ async function getInitialProducts() {
       id: true,
     },
     // uncomment below to enable infinite scroll
-    // take: 1,
+    take: 5,
     orderBy: {
       created_at: "desc",
     },
