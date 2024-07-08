@@ -37,5 +37,5 @@ export async function startStream(_: any, formData: FormData) {
       id: true,
     },
   });
-  redirect(`streams/${stream.id}`);
+  redirect(`/${stream.id}`);
 }
