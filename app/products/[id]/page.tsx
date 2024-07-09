@@ -6,6 +6,7 @@ import { UserIcon } from "@heroicons/react/24/solid";
 import { formatToUSD } from "@/lib/utils";
 import { ProductDeleteButton } from "../delete-button";
 import { revalidateTag, unstable_cache } from "next/cache";
+import BackButton from "@/components/back-button";
 
 async function getIsOwner(userId: number) {
   //   const session = await getSession();
@@ -130,6 +131,7 @@ export default async function ProductDetail({
 
   return (
     <div>
+      <BackButton />
       <div className="relative aspect-square">
         <Image
           fill

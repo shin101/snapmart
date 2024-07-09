@@ -1,8 +1,7 @@
-
-
 import db from "@/lib/db";
 import { getSession } from "@/lib/session";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
 async function getUser() {
@@ -34,8 +33,9 @@ export default async function Profile() {
 
   const onImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     "use server";
-	console.log('!!!!!')
-    return(">>>>>");
+
+    console.log("!!!!!", event);
+    return ">>>>>";
   };
 
   return (
@@ -59,7 +59,15 @@ export default async function Profile() {
         {/* <button className="text-purple-400 rounded-md text-center transition-colors p-1 border border-purple-400 hover:bg-gradient-to-tr hover:from-pink-100 hover:via-white hover:to-purple-200 hover:border-purple-400 w-28">
           Change Photo
         </button> */}
-        <form action={updateProfilePhoto}>
+
+        <Link
+          href="/profile/edit"
+          className="text-purple-400 rounded-md text-center transition-colors p-1 border border-purple-400 hover:bg-gradient-to-tr hover:from-pink-100 hover:via-white hover:to-purple-200 hover:border-purple-400 w-28"
+        >
+          <div>Change Photo</div>
+        </Link>
+
+        {/* <form action={updateProfilePhoto}>
           <label
             htmlFor="photo"
             className="text-purple-400 rounded-md text-center transition-colors p-1 border border-purple-400 hover:bg-gradient-to-tr hover:from-pink-100 hover:via-white hover:to-purple-200 hover:border-purple-400 w-28"
@@ -72,7 +80,7 @@ export default async function Profile() {
             id="photo"
             className="hidden"
           />
-        </form>
+        </form> */}
       </div>
     </div>
   );
