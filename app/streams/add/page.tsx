@@ -8,7 +8,7 @@ export default function AddStream() {
   const [state, action] = useFormState(startStream, null);
   return (
     <>
-      <form className="p-5 flex flex-col gap-2" action={action}>
+      <form className="p-5 flex flex-col gap-2 max-w-screen-sm mx-auto" action={action}>
         <Input
           name="title"
           required

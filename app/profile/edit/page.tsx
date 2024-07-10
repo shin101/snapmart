@@ -49,7 +49,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div>
+    <div className="max-w-screen-sm mx-auto">
       <BackButton />
       <div className="relative">
         <form className="p-5 flex flex-col gap-5">

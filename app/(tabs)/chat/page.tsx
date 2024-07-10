@@ -26,19 +26,26 @@ async function Chat() {
   //   );
 
   return (
-    <div>
+    <div className="max-w-screen-sm mx-auto">
       {allMsg.length > 0 ? (
         allMsg.map((msg) => (
-          <div className="border rounded-md m-2 hover:bg-purple-50" key={msg.id}>
+          <div
+            className="border rounded-md m-2 hover:bg-purple-50"
+            key={msg.id}
+          >
             <Link href={`/chats/${msg.id}`}>
               <div className="m-2 p-2 border-b border-b-purple-300 last:border-b-0 flex justify-between">
-                <Image
-                  src={msg.users[0].avatar!}
-                  width={40}
-                  height={40}
-                  alt="ji"
-                  className="rounded-full"
-                />
+                <div>
+                  <Image
+                    src={msg.users[0].avatar!}
+                    width={40}
+                    height={40}
+                    alt={msg.users[0].username}
+                    className="rounded-full"
+                  />
+                  {msg.users[0].username}
+                </div>
+
                 {msg.id}
               </div>
             </Link>
