@@ -11,6 +11,9 @@ const nextConfig = {
       {
         hostname: "roost.nbcuni.com",
       },
+      {
+        hostname: "qph.cf2.quoracdn.net",
+      },
     ],
   },
 };

@@ -94,13 +94,16 @@ export default function ChatMessagesList({
             }`}
           >
             {message.userId === userId ? null : (
-              <Image
-                src={message.user.avatar || "/default.jpg"}
-                alt={message.user.username}
-                width={50}
-                height={50}
-                className="size-8 rounded-full"
-              />
+              <div className="flex flex-col gap-1">
+                <Image
+                  src={message.user.avatar || "/default.jpg"}
+                  alt={message.user.username}
+                  width={50}
+                  height={50}
+                  className="size-8 rounded-full"
+                />
+                <div className="text-xs">{message.user.username}</div>
+              </div>
             )}
             <div
               className={`flex flex-col gap-1 ${
@@ -114,9 +117,9 @@ export default function ChatMessagesList({
               >
                 {message.payload}
               </span>
-              <span className="text-xs">
+              {/* <span className="text-xs">
                 {formatToTimeAgo(message.created_at.toString())}
-              </span>
+              </span> */}
             </div>
           </div>
         ))}

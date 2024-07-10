@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from "../../public/snapmart.png";
 import feed from "../../public/feed.png";
 import product from "../../public/product.png";
+import chat from "../../public/chat.png";
 
 export default function Home() {
   return (
@@ -13,10 +14,7 @@ export default function Home() {
           <div className="mx-auto flex size-full flex-col px-6 pt-10 lg:pt-0 2xl:px-0">
             <div className="flex flex-col space-y-9 grow md:justify-center ">
               <div className="h-72 overflow-clip flex justify-center items-center">
-                <Image
-                  src={logo}
-                  alt="Snapmart Logo"
-                />
+                <Image src={logo} alt="Snapmart Logo" />
               </div>
               <div className="flex flex-col space-y-1">
                 <p className="leading-5 text-gray-900 font-bold md:!text-3xl">
@@ -60,12 +58,15 @@ export default function Home() {
                 alt="img-card"
               />
               <Image
-                className="bg-white rounded-3xl w-72 h-64"
+                className="bg-white rounded-3xl w-72 h-64 object-contain"
                 src={feed}
-                objectFit="cover"
                 alt="img-card"
               />
-              <div className="bg-white rounded-3xl w-72 h-64"></div>
+              <Image
+                className="bg-white rounded-3xl w-72 h-64 object-contain"
+                src={chat}
+                alt="img-card"
+              />
               <div className="bg-white rounded-3xl w-72 h-64"></div>
               <div className="bg-white rounded-3xl w-72 h-64"></div>
             </div>
