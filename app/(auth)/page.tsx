@@ -52,11 +52,11 @@ export default function Home() {
             <div className="flex flex-col gap-4">
               <img
                 className="bg-white rounded-3xl w-72 h-64"
-                src="/feed.png"
+                src="https://github.com/shin101/snapmart/blob/main/public/product.png?raw=true"
               ></img>
               <img
                 className="bg-white rounded-3xl w-72 h-64"
-                src="/product.png"
+                src="https://github.com/shin101/snapmart/blob/main/public/feed.png?raw=true"
               ></img>
               <div className="bg-white rounded-3xl w-72 h-64"></div>
               <div className="bg-white rounded-3xl w-72 h-64"></div>
