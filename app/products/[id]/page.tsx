@@ -130,7 +130,7 @@ export default async function ProductDetail({
   };
 
   return (
-    <div>
+    <div className="max-w-screen-sm mx-auto">
       <BackButton />
       <div className="relative aspect-square">
         <Image

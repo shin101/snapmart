@@ -1,6 +1,9 @@
 import Link from "next/link";
 import "../../lib/db";
 import Image from "next/image";
+import logo from "../../public/snapmart.png";
+import feed from "../../public/feed.png";
+import product from "../../public/product.png";
 
 export default function Home() {
   return (
@@ -9,12 +12,12 @@ export default function Home() {
         <div className="mx-auto flex max-w-3xl shrink-0 flex-col justify-center sm:h-screen">
           <div className="mx-auto flex size-full flex-col px-6 pt-10 lg:pt-0 2xl:px-0">
             <div className="flex flex-col space-y-9 grow md:justify-center ">
-              <Image
-                src="https://github.com/shin101/snapmart/blob/main/public/snapmart.png?raw=true"
-                width={400}
-                height={400}
-                alt="f"
-              />
+              <div className="h-72 overflow-clip flex justify-center items-center">
+                <Image
+                  src={logo}
+                  alt="Snapmart Logo"
+                />
+              </div>
               <div className="flex flex-col space-y-1">
                 <p className="leading-5 text-gray-900 font-bold md:!text-3xl">
                   Where Every Purchase
@@ -50,14 +53,18 @@ export default function Home() {
         <div className="mx-auto flex max-w-3xl shrink-0 flex-col justify-center sm:h-screen">
           <div className="grid size-full max-w-3xl flex-none grid-cols-2 gap-4 overflow-hidden sm:max-w-5xl lg:max-w-none">
             <div className="flex flex-col gap-4">
-              <img
+              <Image
                 className="bg-white rounded-3xl w-72 h-64"
-                src="https://github.com/shin101/snapmart/blob/main/public/product.png?raw=true"
-              ></img>
-              <img
+                src={product}
+                objectFit="cover"
+                alt="img-card"
+              />
+              <Image
                 className="bg-white rounded-3xl w-72 h-64"
-                src="https://github.com/shin101/snapmart/blob/main/public/feed.png?raw=true"
-              ></img>
+                src={feed}
+                objectFit="cover"
+                alt="img-card"
+              />
               <div className="bg-white rounded-3xl w-72 h-64"></div>
               <div className="bg-white rounded-3xl w-72 h-64"></div>
               <div className="bg-white rounded-3xl w-72 h-64"></div>
@@ -73,23 +80,5 @@ export default function Home() {
         </div>
       </div>
     </div>
-    // <div className="flex flex-col items-center justify-between min-h-screen p-6">
-    //   <div className="my-auto flex flex-col items-center gap-2 *:font-medium">
-    //     <span className="text-9xl">🚀</span>
-    //     <h1 className="text-4xl text-gray-500">Snapmart</h1>
-    //     <h2 className="text-2xl text-gray-400">Welcome to Snapmart</h2>
-    //   </div>
-    //   <div className="flex flex-col items-center gap-3 w-full">
-    //     <Link href="/create-account" className="primary-btn text-lg py-2.5">
-    //       Get started
-    //     </Link>
-    //     <div className="flex gap-2">
-    //       <span>Already have an account?</span>
-    //       <Link href="/login" className="hover:underline">
-    //         Login
-    //       </Link>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
