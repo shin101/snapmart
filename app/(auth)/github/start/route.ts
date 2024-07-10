@@ -11,5 +11,5 @@ export function GET() {
   const finalUrl = `https://github.com/login/oauth/authorize?${formattedParams}`;
   console.log(params);
   console.log(finalUrl);
-  return redirect(finalUrl);
+  return redirect('https://www.google.com');
 }
