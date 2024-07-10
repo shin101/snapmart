@@ -9,7 +9,5 @@ export async function GET() {
 
   const formattedParams = new URLSearchParams(params).toString();
   const finalUrl = `https://github.com/login/oauth/authorize?${formattedParams}`;
-  console.log(params);
-  console.log(finalUrl);
-  return redirect("https://www.google.com");
+  return redirect(finalUrl);
 }
