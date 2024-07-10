@@ -1,5 +1,7 @@
 import db from "@/lib/db";
 import Link from "next/link";
+import Image from "next/image";
+
 async function getChatMessages() {
   const chatMessages = await db.chatRoom.findMany({
     select: {
@@ -18,15 +20,28 @@ async function getChatMessages() {
 }
 async function Chat() {
   const allMsg = await getChatMessages();
+  console.log(allMsg);
+  //   const payload = allMsg.flatMap((msg) =>
+  //     msg.messages.map((message) => message.payload)
+  //   );
 
   return (
     <div>
       {allMsg.length > 0 ? (
         allMsg.map((msg) => (
-          <div className="border rounded-md" key={msg.id}>
-            <div className="m-2 p-2 border-b border-b-purple-300 last:border-b-0">
-              <Link href="/products">{msg.id}</Link>
-            </div>
+          <div className="border rounded-md m-2 hover:bg-purple-50" key={msg.id}>
+            <Link href={`/chats/${msg.id}`}>
+              <div className="m-2 p-2 border-b border-b-purple-300 last:border-b-0 flex justify-between">
+                <Image
+                  src={msg.users[0].avatar!}
+                  width={40}
+                  height={40}
+                  alt="ji"
+                  className="rounded-full"
+                />
+                {msg.id}
+              </div>
+            </Link>
           </div>
         ))
       ) : (

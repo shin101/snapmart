@@ -30,13 +30,13 @@ function TabBar() {
         )}
         <span>Home</span>
       </Link>
-      <Link href="/life" className="flex flex-col items-center gap-px">
-        {pathname == "/life" ? (
+      <Link href="/feed" className="flex flex-col items-center gap-px">
+        {pathname == "/feed" ? (
           <SolidNewspaperIcon className="w-7 h-7" />
         ) : (
           <OutlineNewspaperIcon className="w-7 h-7" />
         )}
-        <span>Life</span>
+        <span>Feed</span>
       </Link>
       <Link href="/chat" className="flex flex-col items-center gap-px">
         {pathname == "/chat" ? (

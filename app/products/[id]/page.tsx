@@ -116,7 +116,7 @@ export default async function ProductDetail({
             connect: [
               // ID of seller
               { id: product.userId },
-              // ID of buyer
+              // my ID
               { id: session.id },
             ],
           },
