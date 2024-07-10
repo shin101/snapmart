@@ -14,6 +14,9 @@ const nextConfig = {
       {
         hostname: "qph.cf2.quoracdn.net",
       },
+      {
+        hostname: "github.com",
+      },
     ],
   },
 };

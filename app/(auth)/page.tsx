@@ -9,8 +9,12 @@ export default function Home() {
         <div className="mx-auto flex max-w-3xl shrink-0 flex-col justify-center sm:h-screen">
           <div className="mx-auto flex size-full flex-col px-6 pt-10 lg:pt-0 2xl:px-0">
             <div className="flex flex-col space-y-9 grow md:justify-center ">
-              Add Snapmart Logo Here Later
-              <Image src="/snapmart.png" width={400} height={400} alt="f" />
+              <Image
+                src="https://github.com/shin101/snapmart/blob/main/public/snapmart.png?raw=true"
+                width={400}
+                height={400}
+                alt="f"
+              />
               <div className="flex flex-col space-y-1">
                 <p className="leading-5 text-gray-900 font-bold md:!text-3xl">
                   Where Every Purchase
