@@ -35,6 +35,7 @@ export default function CreateAccount() {
         <Input
           name="password"
           type="password"
+          autoComplete="new-password"
           placeholder="Password"
           required
           errors={state?.fieldErrors.password}
@@ -43,6 +44,7 @@ export default function CreateAccount() {
         <Input
           name="confirm_password"
           type="password"
+          autoComplete="new-password"
           placeholder="Confirm Password"
           required
           errors={state?.fieldErrors.confirm_password}
