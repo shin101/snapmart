@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-export function GET() {
+export async function GET() {
   const params = {
     client_id: process.env.GITHUB_CLIENT_ID!,
     scope: "read:user, user:email",
@@ -11,5 +11,5 @@ export function GET() {
   const finalUrl = `https://github.com/login/oauth/authorize?${formattedParams}`;
   console.log(params);
   console.log(finalUrl);
-  return redirect('https://www.google.com');
+  return redirect("https://www.google.com");
 }
