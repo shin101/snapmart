@@ -4,6 +4,8 @@ import { getSession } from "@/lib/session";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import logo from "../../../public/snapmart.png";
+import background from "../../../public/default-background.jpg";
 
 async function getUser() {
   const session = await getSession();
@@ -40,46 +42,52 @@ export default async function Profile() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between ">
-        <div className="text-3xl text-gray-500">Welcome, {user?.username} </div>
+    <div className="flex flex-col">
+      <div className="p-4 sticky top-0 flex justify-between border border-b">
+        Add logo here later
         <form action={logOut}>
-          <Button text="Log out" showLoading={false} />
+          <button className="primary-btn w-28">Log out</button>
         </form>
       </div>
-      <div className="flex flex-col">
-        <Image
-          src={user.avatar!}
-          alt={user.username}
-          width={170}
-          height={170}
-          className="my-6"
-        />
-        {/* <button className="text-purple-400 rounded-md text-center transition-colors p-1 border border-purple-400 hover:bg-gradient-to-tr hover:from-pink-100 hover:via-white hover:to-purple-200 hover:border-purple-400 w-28">
-          Change Photo
-        </button> */}
-
-        <Link
-          href="/profile/edit"
-          className="text-purple-400 rounded-md text-center transition-colors p-1 border border-purple-400 hover:bg-gradient-to-tr hover:from-pink-100 hover:via-white hover:to-purple-200 hover:border-purple-400 w-28"
-        >
-          <div>Change Photo</div>
-        </Link>
-
-        {/* <form action={updateProfilePhoto}>
-          <label
-            htmlFor="photo"
-            className="text-purple-400 rounded-md text-center transition-colors p-1 border border-purple-400 hover:bg-gradient-to-tr hover:from-pink-100 hover:via-white hover:to-purple-200 hover:border-purple-400 w-28"
-          >
-            Change Photo
-          </label>
-          <input
-            onChange={onImageChange}
-            type="file"
-            id="photo"
-            className="hidden"
+      <div>
+        <div>
+          <Image
+            src={background}
+            alt="background image"
+            className="flex w-full h-72"
           />
-        </form> */}
+        </div>
+        <div className="flex justify-end items-center p-4 relative">
+          <div className="absolute top-0 left-0 transform translate-x-1/4 -translate-y-1/2">
+            <Image
+              src={user.avatar!}
+              alt={user.username}
+              width={170}
+              height={170}
+              className="rounded-full"
+            />
+          </div>
+          <div>
+            <Link href="/profile/edit" className="primary-btn">
+              Edit Profile
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col space-y-3 my-6 px-4">
+        <div>
+          <p className="text-xl font-bold">{user?.username}</p>
+        </div>
+        <div>
+          <div>X Followers</div>
+          <div>X Following</div>
+        </div>
+        <div>
+          <div>Joined MONTH YEAR</div>
+        </div>
+      </div>
+      <div className="flex py-4 justify-center border-t">
+        <div className="p-4 text-gray-500">No posts here!</div>
       </div>
     </div>
   );

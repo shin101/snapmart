@@ -32,7 +32,7 @@ export const metadata = {
 export default async function Feed() {
   const posts = await getPosts();
   return (
-    <div className="p-5 flex flex-col">
+    <div className="flex flex-col">
       {posts.length != 0 ? (
         <>
           {posts.map((post) => (
