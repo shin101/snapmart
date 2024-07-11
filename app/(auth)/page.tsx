@@ -5,6 +5,7 @@ import logo from "../../public/snapmart.png";
 import feed from "../../public/feed.png";
 import product from "../../public/product.png";
 import chat from "../../public/chat.png";
+import profile from "../../public/profile.png";
 
 export default function Home() {
   return (
@@ -25,16 +26,10 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col space-y-2">
-                <Link
-                  href="/create-account"
-                  className="primary-btn"
-                >
+                <Link href="/create-account" className="primary-btn">
                   Create Account
                 </Link>
-                <Link
-                  href="/login"
-                  className="primary-btn"
-                >
+                <Link href="/login" className="primary-btn">
                   Sign In
                 </Link>
               </div>
@@ -67,7 +62,11 @@ export default function Home() {
                 src={chat}
                 alt="img-card"
               />
-              <div className="bg-white rounded-3xl w-72 h-64"></div>
+              <Image
+                className="bg-white rounded-3xl w-72 h-64 object-contain"
+                src={profile}
+                alt="img-card"
+              />
               <div className="bg-white rounded-3xl w-72 h-64"></div>
             </div>
             <div className="flex size-full origin-center flex-col gap-4">
