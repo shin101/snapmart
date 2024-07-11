@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getSession } from "@/lib/session";
 import { NoMessages } from "@/components/no-messages";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
 async function getChatMessages(userId: number) {
   const chatMessages = await db.chatRoom.findMany({
@@ -40,7 +41,22 @@ async function Chat() {
 
   return (
     <div className=" grid grid-cols-3 h-screen border">
-      <div className=" col-span-1 border-r bg-yellow-200">left menu</div>
+      <div className=" col-span-1 border-r">
+        <div>
+          <div className="flex justify-between px-4 pt-4 items-center">
+            <div className="text-gray-600 text-xl font-bold">Messages</div>
+            <button>
+              <PencilSquareIcon className="size-9 hover:bg-gray-100 rounded-full p-2" />
+            </button>
+          </div>
+          <div className="py-4 flex justify-center">
+            <input
+              className="p-4 m-4 border rounded-full w-full"
+              placeholder="Search Messages"
+            />
+          </div>
+        </div>
+      </div>
       <div className="col-span-2">
         {allMsg.length > 0 ? (
           allMsg.map((msg) => (
@@ -53,12 +69,12 @@ async function Chat() {
                   <div>
                     <Image
                       src={msg.users[0].avatar!}
-                      width={40}
-                      height={40}
+                      width={64}
+                      height={64}
                       alt={msg.users[0].username}
-                      className="rounded-full"
+                      className="rounded-full object-cover size-16"
                     />
-                    {msg.users[0].username}
+                    <div className="text-gray-500">{msg.users[0].username}</div>
                   </div>
 
                   {msg.id}

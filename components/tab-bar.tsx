@@ -21,7 +21,7 @@ import React from "react";
 function TabBar() {
   const pathname = usePathname();
   return (
-    <div className="fixed bottom-0 w-full grid grid-cols-5 border-neutral-400 border-t px-5 py-3 bg-neutral-100">
+    <div className="fixed bottom-0 w-full grid grid-cols-5 border-purple-400 border-t px-5 py-3 text-purple-500 bg-white">
       <Link href="/products" className="flex flex-col items-center gap-px">
         {pathname == "/products" ? (
           <SolidHomeIcon className="w-7 h-7" />
@@ -30,13 +30,13 @@ function TabBar() {
         )}
         <span>Home</span>
       </Link>
-      <Link href="/feed" className="flex flex-col items-center gap-px">
-        {pathname == "/feed" ? (
+      <Link href="/community" className="flex flex-col items-center gap-px">
+        {pathname == "/community" ? (
           <SolidNewspaperIcon className="w-7 h-7" />
         ) : (
           <OutlineNewspaperIcon className="w-7 h-7" />
         )}
-        <span>Feed</span>
+        <span>Community</span>
       </Link>
       <Link href="/chat" className="flex flex-col items-center gap-px">
         {pathname == "/chat" ? (

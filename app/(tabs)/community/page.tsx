@@ -26,10 +26,10 @@ async function getPosts() {
 }
 
 export const metadata = {
-  title: "Feed",
+  title: "Community",
 };
 
-export default async function Feed() {
+export default async function Community() {
   const posts = await getPosts();
   return (
     <div className="flex flex-col">
@@ -38,7 +38,7 @@ export default async function Feed() {
           {posts.map((post) => (
             <Link
               key={post.id}
-              href={`/feed/${post.id}`}
+              href={`/community/${post.id}`}
               className="pb-5 mb-5 border-b border-neutral-500 text-neutral-400 flex  flex-col gap-2 last:pb-0 last:border-b-0"
             >
               <h2 className="text-lg text-purple-400 font-semibold">
