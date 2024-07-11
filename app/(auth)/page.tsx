@@ -27,13 +27,13 @@ export default function Home() {
               <div className="flex flex-col space-y-2">
                 <Link
                   href="/create-account"
-                  className="items-center border-2 font-medium rounded-full focus:outline-none focus:ring-2 transition-all hover:bg-[#818CF8] border-transparent text-gray-100 focus:ring-primary-300 px-6 py-3 flex w-full justify-center bg-[#5547EE]"
+                  className="primary-btn"
                 >
                   Create Account
                 </Link>
                 <Link
                   href="/login"
-                  className="items-center border-2 font-medium border-gray-200 hover:border-gray-400 rounded-full focus:outline-none focus:ring-2 transition-all text-neutral-700 focus:ring-primary-300 px-6 py-3 flex w-full justify-center"
+                  className="primary-btn"
                 >
                   Sign In
                 </Link>

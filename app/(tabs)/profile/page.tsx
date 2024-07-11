@@ -1,3 +1,4 @@
+import Button from "@/components/button";
 import db from "@/lib/db";
 import { getSession } from "@/lib/session";
 import Image from "next/image";
@@ -39,13 +40,11 @@ export default async function Profile() {
   };
 
   return (
-    <div className="max-w-screen-sm mx-auto">
+    <div>
       <div className="flex justify-between ">
         <div className="text-3xl text-gray-500">Welcome, {user?.username} </div>
         <form action={logOut}>
-          <button className="hover:bg-gradient-to-tr hover:from-pink-100 hover:via-white hover:to-purple-200 hover:border-purple-400  border border-purple-400 font-medium  text-purple-400 rounded-md text-center transition-colors p-2">
-            Log out
-          </button>
+          <Button text="Log out" showLoading={false} />
         </form>
       </div>
       <div className="flex flex-col">
