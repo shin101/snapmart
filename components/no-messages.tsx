@@ -1,3 +1,5 @@
+import Button from "./button";
+
 export const NoMessages = () => {
   return (
     <div className="flex flex-col space-y-6 items-center justify-center p-6 h-full">
@@ -8,8 +10,8 @@ export const NoMessages = () => {
         <div className="text-sm text-gray-500">
           Start a chat with any seller
         </div>
-        <button></button>
       </div>
+      <button className="primary-btn py-2 px-2 text-sm w-44">Message someone</button>
     </div>
   );
 };
