@@ -51,7 +51,7 @@ export const ProductPage = ({ initialProducts }: ProductPageProps) => {
   }, [page]);
 
   return (
-    <div className="grid grid-cols-5 gap-2">
+    <div className="grid grid-cols-4 gap-3">
       {products.map((product) => (
         <ListProduct key={product.id} {...product} />
       ))}
@@ -61,9 +61,9 @@ export const ProductPage = ({ initialProducts }: ProductPageProps) => {
       {!isLastPage ? (
         <span
           ref={trigger}
-          className="text-sm font-semibold bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-purple-400 rounded-md w-fit mx-auto px-3 "
+        //   className="text-sm font-semibold bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-purple-400 rounded-md w-fit mx-auto px-3 "
         >
-          {isLoading ? "Loading..." : "Load more"}
+          {/* {isLoading ? "Loading..." : "Load more"} */}
         </span>
       ) : null}
     </div>
