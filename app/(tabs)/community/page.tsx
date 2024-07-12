@@ -45,11 +45,8 @@ export default async function Community() {
       {posts.length != 0 ? (
         <div className="flex flex-col ">
           {posts.map((post) => (
-            <div
-              className="hover:bg-gray-100 p-4 border-b last:pb-0 last:border-b-0 grid grid-cols-6"
-              key={post.id}
-            >
-              <Link href={`/community/${post.id}`} >
+            <Link href={`/community/${post.id}`} key={post.id}>
+              <div className="hover:bg-gray-100 p-4 border-b last:pb-0 last:border-b-0 grid grid-cols-6">
                 <div className="col-span-1 h-full items-center flex justify-center flex-col">
                   <Image
                     src={post.user.avatar!}
@@ -60,35 +57,37 @@ export default async function Community() {
                   />
                   <div className="mt-2">{post.user.username}</div>
                 </div>
-              </Link>
-              <div className="w-full col-span-5">
-                <h2 className="text-lg text-purple-400 font-semibold my-2">
-                  {post.title}
-                </h2>
-                <p className="text-neutral-400 max-h-72 overflow-hidden">
-                  {post.description}
-                </p>
-                <div className="flex items-center justify-between text-sm py-4">
-                  <div className="flex gap-4 items-center">
-                    <span className="text-neutral-500">
-                      {formatToTimeAgo(post.created_at.toString())}
-                    </span>
-                    <span className="text-neutral-500">·</span>
-                    <span className="text-neutral-500">{post.views} views</span>
-                  </div>
-                  <div className="flex gap-4 items-center *:flex *:gap-1 *:items-center">
-                    <span>
-                      <HandThumbUpIcon className="size-4" />
-                      {post._count.likes}
-                    </span>
-                    <span>
-                      <ChatBubbleBottomCenterIcon className="size-4" />
-                      {post._count.comments}
-                    </span>
+                <div className="w-full col-span-5">
+                  <h2 className="text-lg text-purple-400 font-semibold my-2">
+                    {post.title}
+                  </h2>
+                  <p className="text-neutral-400 max-h-72 overflow-hidden">
+                    {post.description}
+                  </p>
+                  <div className="flex items-center justify-between text-sm py-4">
+                    <div className="flex gap-4 items-center">
+                      <span className="text-neutral-500">
+                        {formatToTimeAgo(post.created_at.toString())}
+                      </span>
+                      <span className="text-neutral-500">·</span>
+                      <span className="text-neutral-500">
+                        {post.views} views
+                      </span>
+                    </div>
+                    <div className="flex gap-4 items-center *:flex *:gap-1 *:items-center">
+                      <span>
+                        <HandThumbUpIcon className="size-4" />
+                        {post._count.likes}
+                      </span>
+                      <span>
+                        <ChatBubbleBottomCenterIcon className="size-4" />
+                        {post._count.comments}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       ) : (

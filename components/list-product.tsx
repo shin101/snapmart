@@ -25,7 +25,7 @@ function ListProduct({
             fill
             className="object-cover"
             src={`${photo}/avatar`}
-            alt="hey"
+            alt={title}
           ></Image>
         </div>
         <div className="flex flex-col gap-1">
