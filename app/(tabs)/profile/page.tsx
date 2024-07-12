@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import logo from "../../../public/text-logo.png";
 import background from "../../../public/default-background.jpg";
+import { Header } from "@/components/header";
 
 async function getUser() {
   const session = await getSession();
@@ -31,7 +32,7 @@ export default async function Profile() {
 
   return (
     <div className="flex flex-col border h-screen">
-      <div className="p-4 sticky top-0 flex justify-between">
+      <div className="p-4 sticky top-0 flex justify-between items-center">
         <Image src={logo} alt={user.username} className="h-20 w-36" />
         <form action={logOut}>
           <button className="primary-btn w-28">Log out</button>

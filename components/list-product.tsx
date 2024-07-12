@@ -30,9 +30,6 @@ function ListProduct({
         </div>
         <div className="flex flex-col gap-1">
           <span className="text-lg">{title}</span>
-          <span className="text-sm text-neutral-500">
-            {formatToTimeAgo(created_at.toString())}
-          </span>
           <span className="text-lg font-semibold">${formatToUSD(price)}</span>
         </div>
       </Link>

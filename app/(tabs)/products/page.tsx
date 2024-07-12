@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import Link from "next/link";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { unstable_cache } from "next/cache";
+import { Header } from "@/components/header";
 
 const getCachedProducts = unstable_cache(getInitialProducts, ["home-products"]);
 
@@ -33,6 +34,8 @@ export default async function Products() {
   const initialProducts = await getCachedProducts();
   return (
     <div>
+      <Header />
+	  
       <ProductList initialProducts={initialProducts} />
       <Link
         href="/products/add"

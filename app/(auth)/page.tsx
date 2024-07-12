@@ -46,7 +46,7 @@ export default function Home() {
         </div>
         <div className="mx-auto flex max-w-3xl shrink-0 flex-col justify-center sm:h-screen">
           <div className="grid size-full max-w-3xl flex-none grid-cols-2 gap-4 overflow-hidden sm:max-w-5xl lg:max-w-none">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 animate-slideDown">
               <Image
                 className="bg-white rounded-3xl w-72 h-64"
                 src={product}

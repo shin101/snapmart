@@ -27,7 +27,7 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
           setIsLoading(true);
           const newProducts = await getMoreProducts(page + 1);
 
-		  console.log('>>>', newProducts)
+          console.log(">>>", newProducts);
 
           if (newProducts.length !== 0) {
             setPage((prev) => prev + 1);
@@ -51,7 +51,7 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
   }, [page]);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 p-4">
       {products.map((product) => (
         <ListProduct key={product.id} {...product} />
       ))}

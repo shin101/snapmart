@@ -7,6 +7,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../public/text-logo.png";
+import { Header } from "@/components/header";
 
 async function getPosts() {
   const posts = await db.post.findMany({
@@ -36,12 +37,7 @@ export default async function Community() {
   const posts = await getPosts();
   return (
     <div className="">
-      <div className="p-4 sticky top-0 flex justify-between items-center border-b">
-        <Image src={logo} alt="logo" className="h-20 w-36" />
-        <form>
-          <button className="primary-btn w-28">Post</button>
-        </form>
-      </div>
+      <Header text={"Post"} link={"/community/post"} />
       {posts.length != 0 ? (
         <div className="flex flex-col ">
           {posts.map((post) => (

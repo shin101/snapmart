@@ -3,7 +3,7 @@ import { getSession } from "@/lib/session";
 import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import { UserIcon } from "@heroicons/react/24/solid";
-import { formatToUSD } from "@/lib/utils";
+import { formatToTimeAgo, formatToUSD } from "@/lib/utils";
 import { ProductDeleteButton } from "../delete-button";
 import { revalidateTag, unstable_cache } from "next/cache";
 import BackButton from "@/components/back-button";
@@ -160,6 +160,9 @@ export default async function ProductDetail({
       <div className="p-5">
         <h1 className="text-2xl font-semibold">{product.title}</h1>
         <p>{product.description}</p>
+        <p className="text-sm text-neutral-500">
+          {formatToTimeAgo(product.created_at.toString())}
+        </p>
       </div>
       <div className="fixed w-full bottom-0 left-0 p-5 pb-10 bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-t-purple-400 flex justify-between items-center">
         <span className="font semi-bold text-xl">
