@@ -6,6 +6,7 @@ import feed from "../../public/feed.png";
 import product from "../../public/product.png";
 import chat from "../../public/chat.png";
 import profile from "../../public/profile.png";
+import community from "../../public/community.png";
 
 export default function Home() {
   return (
@@ -67,7 +68,11 @@ export default function Home() {
                 src={profile}
                 alt="img-card"
               />
-              <div className="bg-white rounded-3xl w-72 h-64"></div>
+              <Image
+                className="bg-white rounded-3xl w-72 h-64 object-contain"
+                src={community}
+                alt="img-card"
+              />
             </div>
             <div className="flex size-full origin-center flex-col gap-4">
               <div className="bg-white rounded-3xl w-72 h-64"></div>

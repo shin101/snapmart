@@ -4,7 +4,9 @@ import {
   ChatBubbleBottomCenterIcon,
   HandThumbUpIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
+import logo from "../../../public/text-logo.png";
 
 async function getPosts() {
   const posts = await db.post.findMany({
@@ -14,6 +16,7 @@ async function getPosts() {
       description: true,
       views: true,
       created_at: true,
+      user: true,
       _count: {
         select: {
           comments: true,
@@ -32,39 +35,62 @@ export const metadata = {
 export default async function Community() {
   const posts = await getPosts();
   return (
-    <div className="flex flex-col">
+    <div className="">
+      <div className="p-4 sticky top-0 flex justify-between items-center border-b">
+        <Image src={logo} alt="logo" className="h-20 w-36" />
+        <form>
+          <button className="primary-btn w-28">Post</button>
+        </form>
+      </div>
       {posts.length != 0 ? (
-        <>
+        <div className="flex flex-col ">
           {posts.map((post) => (
-            <Link
+            <div
+              className="hover:bg-gray-100 p-4 border-b last:pb-0 last:border-b-0 grid grid-cols-6"
               key={post.id}
-              href={`/community/${post.id}`}
-              className="pb-5 mb-5 border-b border-neutral-500 text-neutral-400 flex  flex-col gap-2 last:pb-0 last:border-b-0"
             >
-              <h2 className="text-lg text-purple-400 font-semibold">
-                {post.title}
-              </h2>
-              <p>{post.description}</p>
-              <div className="flex items-center justify-between text-sm">
-                <div className="flex gap-4 items-center">
-                  <span>{formatToTimeAgo(post.created_at.toString())}</span>
-                  <span>·</span>
-                  <span>{post.views} views</span>
+              <Link href={`/community/${post.id}`} >
+                <div className="col-span-1 h-full items-center flex justify-center flex-col">
+                  <Image
+                    src={post.user.avatar!}
+                    width={64}
+                    height={64}
+                    alt="user photo"
+                    className="size-16 rounded-full object-cover"
+                  />
+                  <div className="mt-2">{post.user.username}</div>
                 </div>
-                <div className="flex gap-4 items-center *:flex *:gap-1 *:items-center">
-                  <span>
-                    <HandThumbUpIcon className="size-4" />
-                    {post._count.likes}
-                  </span>
-                  <span>
-                    <ChatBubbleBottomCenterIcon className="size-4" />
-                    {post._count.comments}
-                  </span>
+              </Link>
+              <div className="w-full col-span-5">
+                <h2 className="text-lg text-purple-400 font-semibold my-2">
+                  {post.title}
+                </h2>
+                <p className="text-neutral-400 max-h-72 overflow-hidden">
+                  {post.description}
+                </p>
+                <div className="flex items-center justify-between text-sm py-4">
+                  <div className="flex gap-4 items-center">
+                    <span className="text-neutral-500">
+                      {formatToTimeAgo(post.created_at.toString())}
+                    </span>
+                    <span className="text-neutral-500">·</span>
+                    <span className="text-neutral-500">{post.views} views</span>
+                  </div>
+                  <div className="flex gap-4 items-center *:flex *:gap-1 *:items-center">
+                    <span>
+                      <HandThumbUpIcon className="size-4" />
+                      {post._count.likes}
+                    </span>
+                    <span>
+                      <ChatBubbleBottomCenterIcon className="size-4" />
+                      {post._count.comments}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
-        </>
+        </div>
       ) : (
         <div>There are no posts here! Be the first to create one.</div>
       )}

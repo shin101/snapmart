@@ -3,7 +3,7 @@ import { getSession } from "@/lib/session";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import mini from "../../../public/text-logo.png";
+import logo from "../../../public/text-logo.png";
 import background from "../../../public/default-background.jpg";
 
 async function getUser() {
@@ -32,7 +32,7 @@ export default async function Profile() {
   return (
     <div className="flex flex-col border h-screen">
       <div className="p-4 sticky top-0 flex justify-between">
-        <Image src={mini} alt={user.username} className="h-20 w-36" />
+        <Image src={logo} alt={user.username} className="h-20 w-36" />
         <form action={logOut}>
           <button className="primary-btn w-28">Log out</button>
         </form>
