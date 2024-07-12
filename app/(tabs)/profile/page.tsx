@@ -56,7 +56,13 @@ export default async function Profile() {
               className="size-48 rounded-full object-cover"
             />
           </div>
-          <div>
+          <div className="flex gap-2">
+            <Link
+              href="/profile/edit"
+              className="items-center border-2 border-[#5547EE] font-medium rounded-full focus:outline-none focus:ring-2 transition-all hover:bg-[#f5f1fc] border-transparent text-[#5547EE] px-6 py-3 flex w-full"
+            >
+              View Profile
+            </Link>
             <Link href="/profile/edit" className="primary-btn">
               Edit Profile
             </Link>
