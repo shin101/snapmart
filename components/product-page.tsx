@@ -5,11 +5,11 @@ import ListProduct from "./list-product";
 import { InitialProducts } from "@/app/(tabs)/products/page";
 import getMoreProducts from "@/app/(tabs)/products/actions";
 
-interface ProductListProps {
+interface ProductPageProps {
   initialProducts: InitialProducts;
 }
 
-export const ProductList = ({ initialProducts }: ProductListProps) => {
+export const ProductPage = ({ initialProducts }: ProductPageProps) => {
   const [products, setProducts] = useState(initialProducts);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
@@ -51,7 +51,7 @@ export const ProductList = ({ initialProducts }: ProductListProps) => {
   }, [page]);
 
   return (
-    <div className="flex flex-col gap-5 p-4">
+    <div className="grid grid-cols-5 gap-2">
       {products.map((product) => (
         <ListProduct key={product.id} {...product} />
       ))}

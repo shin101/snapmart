@@ -53,7 +53,7 @@ const AddProduct = () => {
 
   const [state, action] = useFormState(interceptAction, null);
   return (
-    <div>
+    <div className="max-w-screen-sm mx-auto">
       <form action={action} className="p-5 flex flex-col gap-5">
         <label
           htmlFor="photo"
