@@ -41,4 +41,4 @@ export function UserProfilePage() {
   );
 }
 
-export default UserProfilePage;
+
