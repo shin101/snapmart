@@ -159,23 +159,19 @@ export default async function ProductDetail({
       </div>
       <div className="p-5">
         <h1 className="text-2xl font-semibold">{product.title}</h1>
+        <div className="font semi-bold text-xl">
+          ${formatToUSD(product.price)}
+        </div>
         <p>{product.description}</p>
         <p className="text-sm text-neutral-500">
           {formatToTimeAgo(product.created_at.toString())}
         </p>
       </div>
-      <div className="fixed w-full bottom-0 left-0 p-5 pb-10 bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-t-purple-400 flex justify-between items-center">
-        <span className="font semi-bold text-xl">
-          ${formatToUSD(product.price)}
-        </span>
-        <div className="flex gap-3">
-          <form action={createChatRoom}>
-            <button className="bg-purple-400 px-5 py-2.5 rounded-md text-white font-semibold">
-              Chat
-            </button>
-          </form>
+      <div>
+        <form action={createChatRoom}>
+          <button className="primary-btn">Message Seller</button>
           {isOwner ? <ProductDeleteButton id={product.id} /> : null}
-        </div>
+        </form>
       </div>
     </div>
   );
