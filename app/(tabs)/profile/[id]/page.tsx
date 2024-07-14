@@ -3,7 +3,7 @@
 import { Card, Dropdown } from "flowbite-react";
 import Image from "next/image";
 
-export function UserProfilePage() {
+export default function UserProfilePage() {
   return (
     <div className="p-4">
       <Card className="max-w-sm">
