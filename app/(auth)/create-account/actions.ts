@@ -7,8 +7,6 @@ import {
   PASSWORD_REGEX_ERROR,
 } from "../../../lib/constants";
 import db from "../../../lib/db";
-import { redirect } from "next/navigation";
-import { getSession, logUserIn } from "../../../lib/session";
 
 const formSchema = z
   .object({

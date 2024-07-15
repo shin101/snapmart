@@ -1,6 +1,6 @@
 "use client";
 
-import { getUploadURL } from "@/app/products/add/actions";
+import { getUploadURL } from "@/app/(tabs)/products/add/actions";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
 import { useState } from "react";
@@ -51,7 +51,7 @@ const EditProfile = () => {
   return (
     <div className="max-w-screen-sm mx-auto">
       <BackButton />
-	  add a function to allow user to chane background image later
+      add a function to allow user to chane background image later
       <div className="relative">
         <form className="p-5 flex flex-col gap-5">
           <label

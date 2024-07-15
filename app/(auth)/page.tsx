@@ -2,7 +2,7 @@ import Link from "next/link";
 import "../../lib/db";
 import Image from "next/image";
 import logo from "../../public/snapmart.png";
-import feed from "../../public/feed.png";
+import post from "../../public/post.png";
 import product from "../../public/product.png";
 import chat from "../../public/chat.png";
 import profile from "../../public/profile.png";
@@ -58,7 +58,7 @@ export default function Home() {
                 />
                 <Image
                   className="bg-white rounded-3xl w-72 h-64 object-contain"
-                  src={feed}
+                  src={post}
                   alt="img-card"
                 />
                 <Image

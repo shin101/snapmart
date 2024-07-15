@@ -6,6 +6,7 @@ import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { getUploadURL, uploadProduct } from "./actions";
 import { useFormState } from "react-dom";
+import BackButton from "@/components/back-button";
 
 const AddProduct = () => {
   const [preview, setPreview] = useState("");
@@ -54,6 +55,7 @@ const AddProduct = () => {
   const [state, action] = useFormState(interceptAction, null);
   return (
     <div className="max-w-screen-sm mx-auto">
+      <BackButton />
       <form action={action} className="p-5 flex flex-col gap-5">
         <label
           htmlFor="photo"
