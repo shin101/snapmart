@@ -36,7 +36,7 @@ export default async function Profile() {
   };
 
   return (
-    <div className="flex flex-col border h-screen">
+    <div className="flex flex-col border h-full">
       <div className="p-4 sticky top-0 flex justify-between items-center">
         <Image
           src={logo}

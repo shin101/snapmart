@@ -7,6 +7,7 @@ import {
   PASSWORD_REGEX_ERROR,
 } from "../../../lib/constants";
 import db from "../../../lib/db";
+import { logUserIn } from "@/lib/session";
 
 const formSchema = z
   .object({
