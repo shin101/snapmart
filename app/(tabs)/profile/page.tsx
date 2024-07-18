@@ -68,7 +68,7 @@ export default async function Profile() {
           <div className="flex gap-3 w-80">
             <Link
               href={`/profile/${user.id}`}
-              className="items-center border-2 border-warm-blue font-medium rounded-full focus:outline-none focus:ring-2 transition-all hover:bg-[#f5f1fc] border-transparent text-[#5547EE] px-6 py-3 flex w-full"
+              className="secondary-btn"
             >
               View Profile
             </Link>

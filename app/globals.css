@@ -11,4 +11,8 @@
 		@apply 
 		items-center border-2 font-medium rounded-full focus:outline-none focus:ring-2 transition-all hover:bg-[#818CF8] border-transparent text-gray-100 px-6 py-3 flex w-full justify-center bg-[#5547EE]
 	}
+	.secondary-btn {
+		@apply 
+		items-center border-2 border-warm-blue font-medium rounded-full focus:outline-none focus:ring-2 transition-all hover:bg-[#f5f1fc] border-transparent text-[#5547EE] px-6 py-3 flex w-full
+	}
 }
