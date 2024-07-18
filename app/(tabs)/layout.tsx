@@ -3,10 +3,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 import TabBar from "@/components/tab-bar";
 import { ReactNode } from "react";
 import { User } from "@prisma/client";
-import { getSession } from "@/lib/session";
 import { getUser } from "@/lib/user";
+import { UserContext } from "@/context/UserContext";
 
-export const UserContext = createContext<User | null>(null);
+
 
 export default function TabLayout({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);

@@ -66,14 +66,14 @@ export default async function Profile() {
             />
           </div>
           <div className="flex gap-3 w-80">
+            <Link href="/profile/edit" className="primary-btn">
+              Edit Profile
+            </Link>
             <Link
               href={`/profile/${user.id}`}
               className="secondary-btn"
             >
               View Profile
-            </Link>
-            <Link href="/profile/edit" className="primary-btn">
-              Edit Profile
             </Link>
           </div>
         </div>

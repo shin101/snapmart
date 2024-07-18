@@ -4,10 +4,11 @@ import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { formatToTimeAgo, formatToUSD } from "@/lib/utils";
-import { ProductDeleteButton } from "../delete-button";
+
 import { revalidateTag, unstable_cache } from "next/cache";
 import BackButton from "@/components/back-button";
 import Link from "next/link";
+import { ProductDeleteButton } from "../delete-button";
 
 async function getIsOwner(userId: number) {
   const session = await getSession();

@@ -11,7 +11,8 @@ import Button from "@/components/button";
 import default_pic from "../../../../public/default.jpg";
 import showUserIdProfile from "./actions";
 import { User } from "@prisma/client";
-import { UserContext } from "../../layout";
+import { UserContext } from "@/context/UserContext";
+
 
 export default function UserProfilePage({
   params,
@@ -38,7 +39,6 @@ export default function UserProfilePage({
           {" "}
           <Header />
           <BackButton />
-
           <div className="p-4">
             <Card className="max-w-xl">
               <div className="flex flex-col items-center pb-10">
@@ -53,14 +53,12 @@ export default function UserProfilePage({
                   {user.username}
                 </h5>
 
-                {thisUserIsMe ? (
-                  <div>cannot add yourself as a friend</div>
-                ) : (
-                  <div className="mt-4 flex space-x-3 lg:mt-6">
-                    <button className="primary-btn">Add friend</button>
-                    <button className="secondary-btn">Message</button>
-                  </div>
-                )}
+				{thisUserIsMe? "":  <div className="mt-4 flex space-x-3 lg:mt-6">
+                  <button className="primary-btn">Follow</button>
+                  <button className="secondary-btn">Message</button>
+                </div>}
+
+              
               </div>
             </Card>
           </div>
