@@ -7,6 +7,7 @@ import { formatToTimeAgo, formatToUSD } from "@/lib/utils";
 import { ProductDeleteButton } from "../delete-button";
 import { revalidateTag, unstable_cache } from "next/cache";
 import BackButton from "@/components/back-button";
+import Link from "next/link";
 
 async function getIsOwner(userId: number) {
   const session = await getSession();
@@ -140,23 +141,25 @@ export default async function ProductDetail({
           alt={product.title}
         />
       </div>
-      <div className="p-5 flex items-center gap-3 border-b border-neutral-600 justify-between">
-        <div>
-          <div className="size-10 rounded-full overflow-hidden">
-            {product.user.avatar !== null ? (
-              <Image
-                src={product.user.avatar}
-                width={40}
-                height={40}
-                alt={product.user.username}
-              />
-            ) : (
-              <UserIcon />
-            )}
-          </div>
+      <div className="p-5 flex items-center gap-3 border-b border-neutral-600 justify-between ">
+        <Link href={`../profile/${product.userId}`}>
+          <div>
+            <div className="size-10 rounded-full overflow-hidden">
+              {product.user.avatar !== null ? (
+                <Image
+                  src={product.user.avatar}
+                  width={40}
+                  height={40}
+                  alt={product.user.username}
+                />
+              ) : (
+                <UserIcon />
+              )}
+            </div>
 
-          <h3>{product.user.username}</h3>
-        </div>
+            <h3>{product.user.username}</h3>
+          </div>
+        </Link>
 
         {isOwner ? (
           <ProductDeleteButton id={product.id} />

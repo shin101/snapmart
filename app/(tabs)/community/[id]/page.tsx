@@ -6,6 +6,7 @@ import { formatToTimeAgo } from "@/lib/utils";
 import Image from "next/image";
 import { getSession } from "@/lib/session";
 import { revalidateTag, unstable_cache } from "next/cache";
+import Link from "next/link";
 
 async function getPost(id: number) {
   try {
@@ -119,19 +120,21 @@ export default async function PostDetail({
   return (
     <div className="p-5">
       <div className="flex items-center gap-2 mb-2">
-        <Image
-          width={28}
-          height={28}
-          className="size-7 rounded-full"
-          src={post.user.avatar!}
-          alt={post.user.username}
-        />
-        <div>
-          <span className="text-sm font-semibold">{post.user.username}</span>
-          <div className="text-xs">
-            <span>{formatToTimeAgo(post.created_at.toString())}</span>
+        <Link href={`../profile/${post.userId}`}>
+          <Image
+            width={28}
+            height={28}
+            className="size-7 rounded-full"
+            src={post.user.avatar!}
+            alt={post.user.username}
+          />
+          <div>
+            <span className="text-sm font-semibold">{post.user.username}</span>
+            <div className="text-xs">
+              <span>{formatToTimeAgo(post.created_at.toString())}</span>
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
       <h2 className="text-lg font-semibold">{post.title}</h2>
       <p className="mb-5">{post.description}</p>
