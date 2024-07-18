@@ -2,8 +2,12 @@
 
 import { Card, Dropdown } from "flowbite-react";
 import Image from "next/image";
+import { useContext } from "react";
+import { UserContext } from "../../layout";
 
 export default function UserProfilePage() {
+  const userInfo = useContext(UserContext);
+  console.log('fadsfaddfasfa', userInfo)
   return (
     <div className="p-4">
       <Card className="max-w-sm">
@@ -40,5 +44,3 @@ export default function UserProfilePage() {
     </div>
   );
 }
-
-
