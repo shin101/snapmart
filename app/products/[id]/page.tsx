@@ -9,10 +9,10 @@ import { revalidateTag, unstable_cache } from "next/cache";
 import BackButton from "@/components/back-button";
 
 async function getIsOwner(userId: number) {
-  //   const session = await getSession();
-  //   if (session.id) {
-  //     return session.id === userId;
-  //   }
+  const session = await getSession();
+  if (session.id) {
+    return session.id === userId;
+  }
   return false;
 }
 
@@ -140,22 +140,31 @@ export default async function ProductDetail({
           alt={product.title}
         />
       </div>
-      <div className="p-5 flex items-center gap-3 border-b border-neutral-600">
-        <div className="size-10 rounded-full overflow-hidden">
-          {product.user.avatar !== null ? (
-            <Image
-              src={product.user.avatar}
-              width={40}
-              height={40}
-              alt={product.user.username}
-            />
-          ) : (
-            <UserIcon />
-          )}
-        </div>
+      <div className="p-5 flex items-center gap-3 border-b border-neutral-600 justify-between">
         <div>
+          <div className="size-10 rounded-full overflow-hidden">
+            {product.user.avatar !== null ? (
+              <Image
+                src={product.user.avatar}
+                width={40}
+                height={40}
+                alt={product.user.username}
+              />
+            ) : (
+              <UserIcon />
+            )}
+          </div>
+
           <h3>{product.user.username}</h3>
         </div>
+
+        {isOwner ? (
+          <ProductDeleteButton id={product.id} />
+        ) : (
+          <form action={createChatRoom}>
+            <button className="primary-btn">Message Seller</button>
+          </form>
+        )}
       </div>
       <div className="p-5">
         <h1 className="text-2xl font-semibold">{product.title}</h1>
@@ -166,12 +175,6 @@ export default async function ProductDetail({
         <p className="text-sm text-neutral-500">
           {formatToTimeAgo(product.created_at.toString())}
         </p>
-      </div>
-      <div>
-        <form action={createChatRoom}>
-          <button className="primary-btn">Message Seller</button>
-          {isOwner ? <ProductDeleteButton id={product.id} /> : null}
-        </form>
       </div>
     </div>
   );
