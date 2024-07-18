@@ -7,12 +7,12 @@ import product from "../../public/product.png";
 import chat from "../../public/chat.png";
 import profile from "../../public/profile.png";
 import community from "../../public/community.png";
-import { UserProvider } from "@/context/UserContext";
+
 
 export default function Home() {
   return (
     <>
-      {/* <UserProvider> */}
+
       <div className="bg-custom-gradient h-screen">
         <div className="mx-auto overflow-hidden sm:h-screen sm:pb-32 lg:flex 2xl:max-w-7xl 2xl:overflow-visible">
           <div className="mx-auto flex max-w-3xl shrink-0 flex-col justify-center sm:h-screen">
@@ -88,7 +88,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* </UserProvider> */}
+   
     </>
   );
 }

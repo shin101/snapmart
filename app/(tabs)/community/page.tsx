@@ -85,6 +85,7 @@ export default async function Community() {
               </div>
             </Link>
           ))}
+		  ADD INFINITE SCROLL FEATURE HERE LATER
         </div>
       ) : (
         <div>There are no posts here! Be the first to create one.</div>
