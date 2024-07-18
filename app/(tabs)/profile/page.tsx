@@ -107,6 +107,8 @@ export default async function Profile() {
                   </div>
                 </div>
               ))}
+
+			  add infinite scroll feature later here
             </div>
           ) : (
             <div className="p-4 text-gray-500">No posts here!</div>
