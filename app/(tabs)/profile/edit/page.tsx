@@ -6,6 +6,8 @@ import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { updatePhoto } from "./actions";
 import BackButton from "@/components/back-button";
+import Input from "@/components/input";
+import Button from "@/components/button";
 
 const EditProfile = () => {
   const [preview, setPreview] = useState("");
@@ -74,7 +76,16 @@ const EditProfile = () => {
             accept="image/*"
             className="hidden"
           />
-        </form>{" "}
+          <Input name="username" required placeholder="Username" type="text" />
+          <Input name="password" required placeholder="Password" type="text" />
+          <Input
+            name="password"
+            required
+            placeholder="Confirm Password"
+            type="text"
+          />
+          <Button text="Submit" />
+        </form>
       </div>
     </div>
   );

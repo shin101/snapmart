@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import ListProduct from "./list-product";
+import ListProduct from "./product-card";
 import { InitialProducts } from "@/app/(tabs)/products/page";
 import getMoreProducts from "@/app/(tabs)/products/actions";
 

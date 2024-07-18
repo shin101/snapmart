@@ -9,24 +9,25 @@ datasource db {
 }
 
 model User {
-    id         Int          @id @default(autoincrement())
-    username   String       @unique
-    email      String?      @unique
-    password   String?
-    phone      String?      @unique
-    github_id  String?      @unique
-    avatar     String?
-    created_at DateTime     @default(now())
-    updated_at DateTime     @updatedAt
-    tokens     SMSToken[]
-    products   Product[]
-    posts      Post[]
-    comments   Comment[]
-    likes      Like[]
-    chat_rooms ChatRoom[]
-    messages   Message[]
-    LiveStream LiveStream[]
-    Cart       Cart[]
+    id          Int          @id @default(autoincrement())
+    username    String       @unique
+    email       String?      @unique
+    password    String?
+    phone       String?      @unique
+    github_id   String?      @unique
+    avatar      String?
+    cover_photo String?
+    created_at  DateTime     @default(now())
+    updated_at  DateTime     @updatedAt
+    tokens      SMSToken[]
+    products    Product[]
+    posts       Post[]
+    comments    Comment[]
+    likes       Like[]
+    chat_rooms  ChatRoom[]
+    messages    Message[]
+    LiveStream  LiveStream[]
+    Cart        Cart[]
 }
 
 model SMSToken {
@@ -55,10 +56,10 @@ model Product {
 }
 
 model Post {
-    id          Int     @id @default(autoincrement())
+    id          Int    @id @default(autoincrement())
     title       String
     description String
-    views       Int     @default(0)
+    views       Int    @default(0)
 
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt

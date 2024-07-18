@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Card } from "flowbite-react";
+import AddToCart from "@/app/(tabs)/cart/actions";
 
 interface ListProductProps {
   title: string;
@@ -26,7 +27,7 @@ function ListProduct({
           imgAlt={title}
           //   imgSrc={`${photo}/avatar`}
           imgSrc={photo.includes("imagedelivery") ? `${photo}/avatar` : photo}
-		  className="w-full"
+          className="w-full"
         >
           <a href="#">
             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -83,12 +84,12 @@ function ListProduct({
               ${formatToUSD(price)}
             </span>
 
-            <a
-              href="#"
+            <button
+              onClick={AddToCart}
               className="rounded-lg bg-warm-blue px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-purple-500 focus:outline-none focus:ring-4"
             >
               Add to cart
-            </a>
+            </button>
           </div>
         </Card>
         {/* <div className="relative size-28 rounded-md overflow-hidden">

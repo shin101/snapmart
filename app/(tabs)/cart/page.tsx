@@ -1,4 +1,4 @@
-import BackButton from "@/components/back-button";
+
 import Image from "next/image";
 
 const Extras = () => {

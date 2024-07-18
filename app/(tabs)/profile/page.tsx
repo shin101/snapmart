@@ -37,7 +37,7 @@ export default async function Profile() {
 
   return (
     <div className="flex flex-col border h-full">
-      <div className="p-4 sticky top-0 flex justify-between items-center">
+      <div className="p-4 sticky top-0 flex justify-between items-center bg-white z-10">
         <Image
           src={logo}
           alt={user.username || "username"}
@@ -50,7 +50,7 @@ export default async function Profile() {
       <div>
         <div>
           <Image
-            src={background}
+            src={user.cover_photo ? background : background}
             alt="background image"
             className="flex w-full h-72"
           />
