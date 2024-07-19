@@ -7,6 +7,7 @@ import Image from "next/image";
 import { getSession } from "@/lib/session";
 import { revalidateTag, unstable_cache } from "next/cache";
 import Link from "next/link";
+import BackButton from "@/components/back-button";
 
 async function getPost(id: number) {
   try {
@@ -119,6 +120,7 @@ export default async function PostDetail({
 
   return (
     <div className="p-5">
+      <BackButton />
       <div className="flex items-center gap-2 mb-2">
         <Link href={`../profile/${post.userId}`}>
           <Image
