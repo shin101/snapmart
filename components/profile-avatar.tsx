@@ -51,7 +51,7 @@ const ProfileAvatar = () => {
   return (
     <div className="absolute top-0 left-0 transform translate-x-1/4 -translate-y-1/2">
       <Image
-        src={user.avatar}
+        src={user.avatar!}
         alt={user.username}
         width={170}
         height={170}
