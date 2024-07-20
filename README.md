@@ -11,3 +11,5 @@ https://snapmart-mu.vercel.app
 ### To Do
 #### Note to self
 - Configure and run ES Lint 
+- Make cloudflare image uploads as reusable components like 'onimagechange'
+- profile pic doesnt update immediately, have to refresh page 

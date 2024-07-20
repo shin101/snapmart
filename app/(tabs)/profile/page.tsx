@@ -4,11 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import logo from "../../../public/text-logo.png";
-import { Header } from "@/components/header";
-import { Post, User } from "@prisma/client";
-import { useEffect, useState } from "react";
 import { getPosts } from "./actions";
 import CoverPhoto from "@/components/cover-photo";
+import ProfileAvatar from "@/components/profile-avatar";
 
 async function getUser() {
   const session = await getSession();
@@ -27,7 +25,6 @@ async function getUser() {
 export default async function Profile() {
   const user = await getUser();
   const posts = await getPosts(user);
-
 
   const logOut = async () => {
     "use server";
@@ -53,15 +50,7 @@ export default async function Profile() {
           <CoverPhoto user={user} />
         </div>
         <div className="flex justify-end items-center p-4 relative">
-          <div className="absolute top-0 left-0 transform translate-x-1/4 -translate-y-1/2">
-            <Image
-              src={user.avatar!}
-              alt={user.username}
-              width={170}
-              height={170}
-              className="size-48 rounded-full object-cover"
-            />
-          </div>
+          <ProfileAvatar />
           <div className="flex gap-3 w-80">
             <Link href="/profile/edit" className="primary-btn">
               Edit Profile

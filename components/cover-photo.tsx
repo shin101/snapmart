@@ -18,8 +18,6 @@ const CoverPhoto = ({ user }: BackgroundProps) => {
   const [uploadURL, setUploadURL] = useState("");
   const [photoId, setPhotoId] = useState("");
 
-  console.log(user?.cover_photo);
-
   const onImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { files },
@@ -65,19 +63,19 @@ const CoverPhoto = ({ user }: BackgroundProps) => {
           display: "inline-block",
         }}
       >
-        <div className="absolute right-8 transform translate-y-48 opacity-70 bg-white hover:bg-opacity-50 rounded-full p-3 border-2  border-gray-500 hover:border-gray-400 cursor-pointer">
-          <label htmlFor="photo">
-            <PencilIcon className="size-8 " />
-          </label>
-          <input
-            onChange={onImageChange}
-            type="file"
-            id="photo"
-            name="photo"
-            accept="image/*"
-            className="hidden"
-          />
-        </div>
+        <label htmlFor="cover-photo">
+          <div className="absolute right-8 transform translate-y-52 opacity-70 bg-gray-100 hover:bg-opacity-50 rounded-full p-2 border  border-gray-500 hover:border-gray-400 cursor-pointer">
+            <PencilIcon className="size-7" />
+            <input
+              onChange={onImageChange}
+              type="file"
+              id="cover-photo"
+              name="photo"
+              accept="image/*"
+              className="hidden"
+            />
+          </div>
+        </label>
       </div>
     </div>
   );

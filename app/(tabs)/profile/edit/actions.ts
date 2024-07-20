@@ -14,24 +14,21 @@ const currPhoto = async () => {
         avatar: true,
       },
     });
-	return curr
+    return curr;
   }
 };
 
 const updatePhoto = async (newAvatarUrl: string) => {
   const session = await getSession();
   if (session.id) {
-    const user = await db.user.update({
+    const newProfilePic = await db.user.update({
       where: { id: session.id },
       data: {
         avatar: newAvatarUrl,
       },
     });
-    if (user) {
-      return user;
-    }
+    return newProfilePic;
   }
-  notFound();
 };
 
 export { updatePhoto, currPhoto };

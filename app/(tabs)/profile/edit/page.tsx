@@ -13,6 +13,7 @@ import { UserContext } from "@/context/UserContext";
 const EditProfile = () => {
   const user = useContext(UserContext);
 
+
   const [preview, setPreview] = useState(user?.avatar || "");
   const [uploadURL, setUploadURL] = useState("");
   const [photoId, setPhotoId] = useState("");
@@ -56,28 +57,10 @@ const EditProfile = () => {
   return (
     <div className="max-w-screen-sm mx-auto">
       <BackButton />
+
       <div className="relative">
         <form className="p-5 flex flex-col gap-5">
-          <label
-            htmlFor="photo"
-            className="border-2 aspect-square flex items-center justify-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer bg-center bg-cover opacity-50"
-            style={{ backgroundImage: `url(${preview})` }}
-          >
-            {preview == "" ? (
-              <>
-                <PhotoIcon className="w-20" />
-                <div className="text-neutral-400 text-sm">Add photo</div>
-              </>
-            ) :  <div className="text-black text-2xl text-bold bg-neutral-100 p-2 rounded-md hover:bg-gray-300 hover:ring-purple-500 hover:ring-4">Update Photo</div>}
-          </label>
-          <input
-            onChange={onImageChange}
-            type="file"
-            id="photo"
-            name="photo"
-            accept="image/*"
-            className="hidden"
-          />
+
           <Input name="username" required placeholder="Username" type="text" />
           <Input name="password" required placeholder="Password" type="text" />
           <Input
