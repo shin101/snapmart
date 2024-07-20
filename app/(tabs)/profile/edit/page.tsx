@@ -12,7 +12,6 @@ import { UserContext } from "@/context/UserContext";
 
 const EditProfile = () => {
   const user = useContext(UserContext);
-  console.log(user)
 
   const [preview, setPreview] = useState(user?.avatar || "");
   const [uploadURL, setUploadURL] = useState("");
@@ -57,7 +56,6 @@ const EditProfile = () => {
   return (
     <div className="max-w-screen-sm mx-auto">
       <BackButton />
-      add a function to allow user to chane background image later
       <div className="relative">
         <form className="p-5 flex flex-col gap-5">
           <label

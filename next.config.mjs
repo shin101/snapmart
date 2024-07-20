@@ -17,6 +17,9 @@ const nextConfig = {
       {
         hostname: "artmajeur.com",
       },
+      {
+        hostname: "github.com",
+      },
     ],
   },
 };

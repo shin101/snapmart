@@ -4,11 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import logo from "../../../public/text-logo.png";
-import background from "../../../public/default-background.jpg";
 import { Header } from "@/components/header";
 import { Post, User } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { getPosts } from "./actions";
+import CoverPhoto from "@/components/cover-photo";
 
 async function getUser() {
   const session = await getSession();
@@ -27,6 +27,7 @@ async function getUser() {
 export default async function Profile() {
   const user = await getUser();
   const posts = await getPosts(user);
+
 
   const logOut = async () => {
     "use server";
@@ -49,11 +50,7 @@ export default async function Profile() {
       </div>
       <div>
         <div>
-          <Image
-            src={user.cover_photo ? background : background}
-            alt="background image"
-            className="flex w-full h-72"
-          />
+          <CoverPhoto user={user} />
         </div>
         <div className="flex justify-end items-center p-4 relative">
           <div className="absolute top-0 left-0 transform translate-x-1/4 -translate-y-1/2">
@@ -69,10 +66,7 @@ export default async function Profile() {
             <Link href="/profile/edit" className="primary-btn">
               Edit Profile
             </Link>
-            <Link
-              href={`/profile/${user.id}`}
-              className="secondary-btn"
-            >
+            <Link href={`/profile/${user.id}`} className="secondary-btn">
               View Profile
             </Link>
           </div>
@@ -107,8 +101,7 @@ export default async function Profile() {
                   </div>
                 </div>
               ))}
-
-			  add infinite scroll feature later here
+              add infinite scroll feature later here
             </div>
           ) : (
             <div className="p-4 text-gray-500">No posts here!</div>
