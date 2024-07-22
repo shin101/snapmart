@@ -47,7 +47,7 @@ export default function UserProfilePage({
                   height="96"
                   src={user.avatar || default_pic}
                   width="96"
-                  className="mb-3 rounded-full shadow-lg"
+                  className="mb-3 rounded-full shadow-lg w-28 h-28 object-cover"
                 />
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
                   {user.username}
