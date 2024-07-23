@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Card } from "flowbite-react";
-import AddToCart from "@/app/(tabs)/cart/actions";
+import addToCart from "@/app/(tabs)/cart/actions";
+import { MouseEvent } from "react";
 
 interface ListProductProps {
   title: string;
@@ -12,6 +13,11 @@ interface ListProductProps {
   photo: string;
   id: number;
 }
+
+const handleClick = async (e: MouseEvent<HTMLButtonElement>, id: number) => {
+  e.preventDefault();
+  await addToCart(id);
+};
 
 function ListProduct({
   title,
@@ -85,7 +91,7 @@ function ListProduct({
             </span>
 
             <button
-              onClick={AddToCart}
+              onClick={(e) => handleClick(e, id)}
               className="rounded-lg bg-warm-blue px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-purple-500 focus:outline-none focus:ring-4"
             >
               Add to cart

@@ -12,7 +12,7 @@ import default_pic from "../../../../public/default.jpg";
 import showUserIdProfile from "./actions";
 import { User } from "@prisma/client";
 import { UserContext } from "@/context/UserContext";
-
+import { getPosts } from "../actions";
 
 export default function UserProfilePage({
   params,
@@ -39,29 +39,37 @@ export default function UserProfilePage({
           {" "}
           <Header />
           <BackButton />
-          <div className="p-4">
-            <Card className="max-w-xl">
-              <div className="flex flex-col items-center pb-10">
-                <Image
-                  alt="user image"
-                  height="96"
-                  src={user.avatar || default_pic}
-                  width="96"
-                  className="mb-3 rounded-full shadow-lg w-28 h-28 object-cover"
-                />
-                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                  {user.username}
-                </h5>
+          <div className="grid grid-cols-2">
+            <div className="col-span-1">
+              <Card className="max-w-xl">
+                <div className="flex flex-col items-center pb-10">
+                  <Image
+                    alt="user image"
+                    height="96"
+                    src={user.avatar || default_pic}
+                    width="96"
+                    className="mb-3 rounded-full shadow-lg w-28 h-28 object-cover"
+                  />
+                  <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                    {user.username}
+                  </h5>
 
-				{thisUserIsMe? "":  <div className="mt-4 flex space-x-3 lg:mt-6">
-                  <button className="primary-btn">Follow</button>
-                  <button className="secondary-btn">Message</button>
-                </div>}
-
-              
-              </div>
-            </Card>
+                  {thisUserIsMe ? (
+                    ""
+                  ) : (
+                    <div className="mt-4 flex space-x-3 lg:mt-6">
+                      <button className="primary-btn">Follow</button>
+                      <button className="secondary-btn">Message</button>
+                    </div>
+                  )}
+                </div>
+              </Card>
+            </div>
+            <div className="col-span-1 bg-red-300">
+              <div>Activity</div>
+            </div>
           </div>
+          <div className="bg-green-300">{user.username}'s marketplace</div>
         </div>
       ) : (
         <div>Loading...</div>
