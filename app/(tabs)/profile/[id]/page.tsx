@@ -69,7 +69,7 @@ export default function UserProfilePage({
               <div>Activity</div>
             </div>
           </div>
-          <div className="bg-green-300">{user.username}'s marketplace</div>
+          <div className="bg-green-300">{user.username}&apos; marketplace</div>
         </div>
       ) : (
         <div>Loading...</div>
