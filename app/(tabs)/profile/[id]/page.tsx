@@ -13,6 +13,7 @@ import showUserIdProfile from "./actions";
 import { User } from "@prisma/client";
 import { UserContext } from "@/context/UserContext";
 import { getPosts } from "../actions";
+import Loading from "@/components/loading";
 
 export default function UserProfilePage({
   params,
@@ -72,7 +73,7 @@ export default function UserProfilePage({
           <div className="bg-green-300">{user.username}&apos; marketplace</div>
         </div>
       ) : (
-        <div>Loading...</div>
+        <Loading />
       )}
     </div>
   );
