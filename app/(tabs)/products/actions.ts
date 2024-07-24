@@ -19,4 +19,12 @@ const getMoreProducts = async (page: number) => {
   return products;
 };
 
+// const getMyProducts = async(userId:number) => {
+// 	const products = await db.product.findMany({
+// 		where: {
+		
+// 		}
+// 	})
+// }
+
 export default getMoreProducts;

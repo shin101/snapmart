@@ -27,8 +27,6 @@ export default function UserProfilePage({
   const me = useContext(UserContext);
 
   console.log("my posts are", posts);
-  // const posts = await getPosts(me.id)
-  //   console.log(posts)
 
   useEffect(() => {
     const getThisUserInfo = async () => {
