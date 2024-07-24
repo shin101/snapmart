@@ -9,7 +9,7 @@ import { getSession } from "@/lib/session";
 import { revalidateTag, unstable_cache } from "next/cache";
 import Link from "next/link";
 import BackButton from "@/components/back-button";
-import deletePost from "./actions";
+// import deletePost from "./actions";
 
 
 async function getPost(id: number) {
