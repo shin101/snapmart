@@ -1,7 +1,7 @@
 "use server";
 import db from "@/lib/db";
 
-const getMoreProducts = async (page: number) => {
+export const getMoreProducts = async (page: number) => {
   const products = await db.product.findMany({
     select: {
       title: true,
@@ -19,12 +19,11 @@ const getMoreProducts = async (page: number) => {
   return products;
 };
 
-// const getMyProducts = async(userId:number) => {
-// 	const products = await db.product.findMany({
-// 		where: {
-		
-// 		}
-// 	})
-// }
-
-export default getMoreProducts;
+export const getMyProducts = async (userId: number) => {
+  const products = await db.product.findMany({
+    where: {
+      userId,
+    },
+  });
+  return products;
+};

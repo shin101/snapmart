@@ -15,6 +15,7 @@ import { UserContext } from "@/context/UserContext";
 import { getPosts } from "../actions";
 import Loading from "@/components/loading";
 import Link from "next/link";
+import { getMyProducts } from "../../products/actions";
 
 export default function UserProfilePage({
   params,
@@ -23,10 +24,8 @@ export default function UserProfilePage({
 }) {
   const [user, setUser] = useState<User | null>(null);
   const [posts, setPosts] = useState<Post[] | null>(null);
-  const [products, setProducts] = useState<Product | null>(null);
+  const [products, setProducts] = useState<Product[] | null>(null);
   const me = useContext(UserContext);
-
-  console.log("my posts are", posts);
 
   useEffect(() => {
     const getThisUserInfo = async () => {
@@ -35,6 +34,8 @@ export default function UserProfilePage({
       if (userInfo) {
         const posts = await getPosts(userInfo);
         setPosts(posts);
+        const myProducts = await getMyProducts(userInfo.id);
+        setProducts(myProducts);
       }
     };
     getThisUserInfo();
@@ -105,7 +106,17 @@ export default function UserProfilePage({
             <div className="flex items-center justify-center text-lg p-3 bg-warm-blue text-white rounded-t-lg w-full">
               Marketplace
             </div>
-            <div className="flex"> stuff im selling</div>
+            <div className="flex min-h-40 w-full items-center justify-center">
+              {products && products.length != 0 ? (
+                <div>
+                  {products.map((product) => (
+                    <div key={product.id}>{product.title}</div>
+                  ))}
+                </div>
+              ) : (
+                <div className=""> This user has no listing </div>
+              )}
+            </div>
           </div>
         </div>
       ) : (
