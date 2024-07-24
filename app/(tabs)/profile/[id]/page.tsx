@@ -106,15 +106,24 @@ export default function UserProfilePage({
             <div className="flex items-center justify-center text-lg p-3 bg-warm-blue text-white rounded-t-lg w-full">
               Marketplace
             </div>
-            <div className="flex min-h-40 w-full items-center justify-center">
+            <div className="flex w-full items-center justify-center">
               {products && products.length != 0 ? (
-                <div>
+                <div className="w-full">
                   {products.map((product) => (
-                    <div key={product.id}>{product.title}</div>
+                    <div
+                      key={product.id}
+                      className={`border-b last:border-none hover:bg-gray-100 text-gray-600 p-4  flex justify-center`}
+                    >
+                      {product.title}
+                      <h2>make link clickable and add image</h2>
+                    </div>
                   ))}
                 </div>
               ) : (
-                <div className=""> This user has no listing </div>
+                <div className="min-h-20 flex justify-center items-center">
+                  {" "}
+                  This user has no listing{" "}
+                </div>
               )}
             </div>
           </div>

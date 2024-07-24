@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ListProduct from "./product-card";
 import { InitialProducts } from "@/app/(tabs)/products/page";
-import getMoreProducts from "@/app/(tabs)/products/actions";
+import {getMoreProducts} from "@/app/(tabs)/products/actions";
 
 interface ProductPageProps {
   initialProducts: InitialProducts;
