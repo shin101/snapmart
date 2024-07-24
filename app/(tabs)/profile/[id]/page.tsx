@@ -60,7 +60,7 @@ export default function UserProfilePage({
                     height="96"
                     src={user.avatar || default_pic}
                     width="96"
-                    className="mb-3 rounded-full shadow-lg w-28 h-28 object-cover"
+                    className="mb-3 rounded-full shadow-md w-28 h-28 object-cover"
                   />
                   <h5 className="mb-1 text-xl font-medium text-gray-600 dark:text-white">
                     {user.username}
@@ -88,7 +88,9 @@ export default function UserProfilePage({
                       <Link href={`/community/${post.id}`}>
                         <div
                           key={post.id}
-                          className={`border-b last:border-none hover:bg-gray-100 text-gray-600 p-4 ${idx === 4 && "rounded-b-lg"}`}
+                          className={`border-b last:border-none hover:bg-gray-100 text-gray-600 p-4 ${
+                            idx === 4 && "rounded-b-lg"
+                          }`}
                         >
                           {post.title}
                         </div>
@@ -101,7 +103,12 @@ export default function UserProfilePage({
               )}
             </div>
           </div>
-          <div className="bg-green-300">{user.username}&apos; marketplace</div>
+          <div className="flex flex-col items-center justify-center border rounded-lg shadow-md mt-6">
+            <div className="flex items-center justify-center text-lg p-3 bg-warm-blue text-white rounded-t-lg w-full">
+              Marketplace
+            </div>
+            <div className="flex"> stuff im selling</div>
+          </div>
         </div>
       ) : (
         <Loading />
