@@ -1,3 +1,4 @@
+
 import db from "@/lib/db";
 import { notFound } from "next/navigation";
 import { EyeIcon, HandThumbUpIcon } from "@heroicons/react/24/solid";
@@ -8,6 +9,8 @@ import { getSession } from "@/lib/session";
 import { revalidateTag, unstable_cache } from "next/cache";
 import Link from "next/link";
 import BackButton from "@/components/back-button";
+import deletePost from "./actions";
+
 
 async function getPost(id: number) {
   try {
@@ -92,6 +95,7 @@ export default async function PostDetail({
   const session = await getSession();
   const myId = session.id;
 
+
   const likePost = async () => {
     "use server";
     try {
@@ -119,6 +123,7 @@ export default async function PostDetail({
     } catch (e) {}
   };
   const { likeCount, isLiked } = await getCachedLikeStatus(id);
+
 
   return (
     <div className="p-5">
@@ -167,7 +172,10 @@ export default async function PostDetail({
             </button>
           </form>
           {myId === post.userId ? (
-            <button className="bg-red-400 p-2.5 rounded-full text-white text-sm hover:bg-red-300">
+            <button
+              className="bg-red-400 p-2.5 rounded-full text-white text-sm hover:bg-red-300"
+             
+            >
               Delete Post
             </button>
           ) : null}

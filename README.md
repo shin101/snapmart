@@ -15,3 +15,4 @@ https://snapmart-mu.vercel.app
 - session into reusable code, delete repetitive code
 - profile pic doesnt update immediately, have to refresh page 
 - Community post :           {/* SHOW ERROR MESSAGES IF MESSAGE DOESNT MEET LENGTH REQUIREMENT */}
+- each user's profile url param should be username not id 
