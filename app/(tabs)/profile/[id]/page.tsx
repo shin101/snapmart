@@ -98,7 +98,10 @@ export default function UserProfilePage({
                   ))}
                 </div>
               ) : (
-                <div className="text-gray-600">This user has no post</div>
+                <div className="text-gray-600">
+                  This user has no post
+                  <div>RENDER TITLE BAR</div>
+                </div>
               )}
             </div>
           </div>

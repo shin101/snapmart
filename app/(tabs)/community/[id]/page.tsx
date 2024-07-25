@@ -1,16 +1,14 @@
-
 import db from "@/lib/db";
 import { notFound } from "next/navigation";
-import { EyeIcon, HandThumbUpIcon } from "@heroicons/react/24/solid";
-import { HandThumbUpIcon as OutlineHandThumbUpIcon } from "@heroicons/react/24/outline";
+import { EyeIcon } from "@heroicons/react/24/solid";
 import { formatToTimeAgo } from "@/lib/utils";
 import Image from "next/image";
 import { getSession } from "@/lib/session";
 import { revalidateTag, unstable_cache } from "next/cache";
 import Link from "next/link";
 import BackButton from "@/components/back-button";
+import LikeButton from "@/components/like-button";
 // import deletePost from "./actions";
-
 
 async function getPost(id: number) {
   try {
@@ -95,35 +93,7 @@ export default async function PostDetail({
   const session = await getSession();
   const myId = session.id;
 
-
-  const likePost = async () => {
-    "use server";
-    try {
-      await db.like.create({
-        data: {
-          postId: id,
-          userId: myId!,
-        },
-      });
-      revalidateTag(`like-status-${id}`);
-    } catch (e) {}
-  };
-  const dislikePost = async () => {
-    "use server";
-    try {
-      await db.like.delete({
-        where: {
-          id: {
-            postId: id,
-            userId: myId!,
-          },
-        },
-      });
-      revalidateTag(`like-status-${id}`);
-    } catch (e) {}
-  };
   const { likeCount, isLiked } = await getCachedLikeStatus(id);
-
 
   return (
     <div className="p-5">
@@ -153,29 +123,9 @@ export default async function PostDetail({
           <span>{post.views} Views</span>
         </div>
         <div className="flex gap-2">
-          <form action={isLiked ? dislikePost : likePost}>
-            <button
-              className={`flex items-center gap-2 text-neutral-400 text-sm border border-purple-400 rounded-full p-2 transition-colors ${
-                isLiked && " bg-purple-400 text-white"
-              } `}
-            >
-              {isLiked ? (
-                <HandThumbUpIcon className="size-5" />
-              ) : (
-                <OutlineHandThumbUpIcon className="size-5" />
-              )}
-              {isLiked ? (
-                <span>({likeCount})</span>
-              ) : (
-                <span>Like ({likeCount})</span>
-              )}
-            </button>
-          </form>
+          <LikeButton isLiked={isLiked} likeCount={likeCount} postId={id} />
           {myId === post.userId ? (
-            <button
-              className="bg-red-400 p-2.5 rounded-full text-white text-sm hover:bg-red-300"
-             
-            >
+            <button className="bg-red-400 p-2.5 rounded-full text-white text-sm hover:bg-red-300">
               Delete Post
             </button>
           ) : null}
