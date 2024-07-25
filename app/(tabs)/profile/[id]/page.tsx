@@ -77,32 +77,34 @@ export default function UserProfilePage({
               </Card>
             </div>
             <div className="col-span-1 flex items-center justify-center border rounded-lg shadow-lg max-h-80">
-              {posts && posts.length != 0 ? (
-                <div className="w-full h-full">
-                  <div className="text-lg flex justify-center p-3 bg-warm-blue text-white rounded-t-lg w-full">
-                    Recent Activity
+              <div className="w-full h-full flex flex-col">
+                <div className="text-lg flex justify-center p-3 bg-warm-blue text-white rounded-t-lg w-full">
+                  Recent Activity
+                </div>
+
+                {posts && posts.length != 0 ? (
+                  <div>
+                    {posts.slice(0, 5).map((post, idx) => (
+                      <>
+                        <Link href={`/community/${post.id}`}>
+                          <div
+                            key={post.id}
+                            className={`border-b last:border-none hover:bg-gray-100 text-gray-600 p-4 ${
+                              idx === 4 && "rounded-b-lg"
+                            }`}
+                          >
+                            {post.title}
+                          </div>
+                        </Link>
+                      </>
+                    ))}
                   </div>
-                  {posts.slice(0, 5).map((post, idx) => (
-                    <>
-                      <Link href={`/community/${post.id}`}>
-                        <div
-                          key={post.id}
-                          className={`border-b last:border-none hover:bg-gray-100 text-gray-600 p-4 ${
-                            idx === 4 && "rounded-b-lg"
-                          }`}
-                        >
-                          {post.title}
-                        </div>
-                      </Link>
-                    </>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-gray-600">
-                  This user has no post
-                  <div>RENDER TITLE BAR</div>
-                </div>
-              )}
+                ) : (
+                  <div className="text-gray-600 flex justify-center items-center flex-grow">
+                    This user has no post
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className="flex flex-col items-center justify-center border rounded-lg shadow-md mt-6">

@@ -16,3 +16,5 @@ https://snapmart-mu.vercel.app
 - profile pic doesnt update immediately, have to refresh page 
 - Community post :           {/* SHOW ERROR MESSAGES IF MESSAGE DOESNT MEET LENGTH REQUIREMENT */}
 - each user's profile url param should be username not id 
+- can use useOptimistic to improve comments for different posts #14.5 vid
+- make default text color gray

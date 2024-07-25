@@ -18,5 +18,5 @@ export async function logUserIn(userId: number) {
   const session = await getSession();
   session.id = userId;
   await session.save();
-  redirect("/profile");
+  redirect("/products");
 }

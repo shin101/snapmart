@@ -126,7 +126,7 @@ const smsLogIn = async (prevState: ActionState, formData: FormData) => {
       });
 
       // log the user in
-      redirect("/profile");
+      redirect("/products");
     }
   }
 };
