@@ -42,7 +42,7 @@ export async function getCachedLikeStatus(postId: number) {
   return cachedOperation(postId, userId!);
 }
 
-async function getPost(id: number) {
+export async function getPost(id: number) {
   try {
     const post = await db.post.update({
       where: {
@@ -63,7 +63,7 @@ async function getPost(id: number) {
             comments: true,
           },
         },
-      }
+      },
     });
     return post;
   } catch (e) {

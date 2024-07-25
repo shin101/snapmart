@@ -8,13 +8,24 @@ import BackButton from "@/components/back-button";
 import LikeButton from "@/components/like-button";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/UserContext";
-import { Post } from "@prisma/client";
+import { Post, Prisma } from "@prisma/client";
 import { getCachedLikeStatus, getCachedPost } from "./actions";
 import Loading from "@/components/loading";
 import { deletePost } from "./actions";
 
+type PostWithUser = Prisma.PostGetPayload<{
+  include: {
+    user: {
+      select: {
+        username: true;
+        avatar: true;
+      };
+    };
+  };
+}>;
+
 export default function PostDetail({ params }: { params: { id: string } }) {
-  const [post, setMyPost] = useState<Post | null>(null);
+  const [post, setMyPost] = useState<PostWithUser | null>(null);
   const [likeStatus, setLikeStatus] = useState({
     likeCount: 0,
     isLiked: false,
@@ -27,7 +38,6 @@ export default function PostDetail({ params }: { params: { id: string } }) {
     const fetchData = async () => {
       const id = Number(params.id);
       const fetchedPost = await getCachedPost(id);
-      if (!fetchedPost) return;
       setMyPost(fetchedPost);
       const likeData = await getCachedLikeStatus(id);
       setLikeStatus(likeData);
@@ -38,7 +48,6 @@ export default function PostDetail({ params }: { params: { id: string } }) {
   function handleDelete() {
     deletePost(post!.id);
   }
-
 
   return (
     <div className="p-5">
