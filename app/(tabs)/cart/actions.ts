@@ -14,15 +14,15 @@ const addToCart = async (id: number) => {
   const userId = await getUser();
 
 
-    await db.cart.upsert({
-      where: {
-        userId,
-      },
-      update: {
+    // await db.cart.upsert({
+    //   where: {
+    //     userId,
+    //   },
+    //   update: {
 
-  	},
-      create: {},
-    });
+  	// },
+    //   create: {},
+    // });
 };
 
 export default addToCart;
