@@ -18,3 +18,4 @@ https://snapmart-mu.vercel.app
 - each user's profile url param should be username not id 
 - can use useOptimistic to improve comments for different posts #14.5 vid
 - make default text color gray
+- making a community post seems to not work 

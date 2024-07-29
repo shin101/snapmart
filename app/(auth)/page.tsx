@@ -7,12 +7,11 @@ import product from "../../public/product.png";
 import chat from "../../public/chat.png";
 import profile from "../../public/profile.png";
 import community from "../../public/community.png";
-
+import pp from "../../public/public-profile.png";
 
 export default function Home() {
   return (
     <>
-
       <div className="bg-custom-gradient h-screen">
         <div className="mx-auto overflow-hidden sm:h-screen sm:pb-32 lg:flex 2xl:max-w-7xl 2xl:overflow-visible">
           <div className="mx-auto flex max-w-3xl shrink-0 flex-col justify-center sm:h-screen">
@@ -78,7 +77,11 @@ export default function Home() {
                 />
               </div>
               <div className="flex size-full origin-center flex-col gap-4">
-                <div className="bg-white rounded-3xl w-72 h-64"></div>
+                <Image
+                  className="bg-white rounded-3xl w-72 h-64 object-contain"
+                  src={pp}
+                  alt="img-card"
+                />
                 <div className="bg-white rounded-3xl w-72 h-64"></div>
                 <div className="bg-white rounded-3xl w-72 h-64"></div>
                 <div className="bg-white rounded-3xl w-72 h-64"></div>
@@ -88,7 +91,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-   
     </>
   );
 }

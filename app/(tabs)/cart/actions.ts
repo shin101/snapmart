@@ -12,18 +12,17 @@ async function getUser() {
 
 const addToCart = async (id: number) => {
   const userId = await getUser();
-  
 
-//   await db.cart.upsert({
-//     where: {
-//       userId,
-//     },
-//     update: {
-		
 
-// 	},
-//     create: {},
-//   });
+    await db.cart.upsert({
+      where: {
+        userId,
+      },
+      update: {
+
+  	},
+      create: {},
+    });
 };
 
 export default addToCart;

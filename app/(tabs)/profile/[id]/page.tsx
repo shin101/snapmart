@@ -113,15 +113,28 @@ export default function UserProfilePage({
             </div>
             <div className="flex w-full items-center justify-center">
               {products && products.length != 0 ? (
-                <div className="w-full">
+                <div className="flex flex-col w-full">
                   {products.map((product) => (
-                    <div
+                    <Link
                       key={product.id}
-                      className={`border-b last:border-none hover:bg-gray-100 text-gray-600 p-4  flex justify-center`}
+                      className="flex hover:bg-gray-100 p-3"
+                      href={`/products/${product.id.toString()}`}
                     >
-                      {product.title}
-                      <h2>make link clickable and add image</h2>
-                    </div>
+                      {/* check above url */}
+                      <Image
+                        src={`${product.photo}/avatar`}
+                        width={100}
+                        height={100}
+                        alt={product.title}
+                        className="rounded-md"
+                      />
+                      <div
+                        className={`border-b last:border-none text-gray-600 p-4  flex `}
+                      >
+                        {product.title}
+                        {/* {product.created_at.toString()} */}
+                      </div>
+                    </Link>
                   ))}
                 </div>
               ) : (
