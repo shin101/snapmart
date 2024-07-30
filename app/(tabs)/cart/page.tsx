@@ -1,10 +1,17 @@
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { getMyCart } from "./actions";
 
-const Cart = () => {
+const Cart = async () => {
+  const myItems = await getMyCart();
+
+  console.log(myItems, "$$");
+
   return (
     <div className="p-4">
-      {false ? (
+      {myItems ? (
         <div>
+			you have crap in your cart
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -180,8 +187,11 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center">
-          <div className="relative w-1/2 max-w-md">Your cart is empty.</div>
+        <div className="flex justify-center items-center h-svh">
+          <div className="bg-purple-50 rounded-full h-96 w-96 flex flex-col justify-center items-center">
+            <ShoppingCartIcon className="h-60 w-60" />
+            <div>Your cart is empty.</div>
+          </div>
         </div>
       )}
     </div>

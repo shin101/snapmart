@@ -8,6 +8,7 @@ import chat from "../../public/chat.png";
 import profile from "../../public/profile.png";
 import community from "../../public/community.png";
 import pp from "../../public/public-profile.png";
+import cart from "../../public/empty.png";
 
 export default function Home() {
   return (
@@ -82,7 +83,11 @@ export default function Home() {
                   src={pp}
                   alt="img-card"
                 />
-                <div className="bg-white rounded-3xl w-72 h-64"></div>
+                <Image
+                  className="bg-white rounded-3xl w-72 h-64 object-contain"
+                  src={cart}
+                  alt="img-card"
+                />
                 <div className="bg-white rounded-3xl w-72 h-64"></div>
                 <div className="bg-white rounded-3xl w-72 h-64"></div>
                 <div className="bg-white rounded-3xl w-72 h-64"></div>

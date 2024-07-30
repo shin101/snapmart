@@ -10,19 +10,31 @@ async function getUser() {
   return session.id;
 }
 
+export const getMyCart = async () => {
+  const userId = await getUser();
+  const myItems = await db.cart.findUnique({
+    where: {
+      userId,
+    },
+    include: {
+      product: true,
+    },
+  });
+  return myItems;
+};
+
 const addToCart = async (id: number) => {
   const userId = await getUser();
 
+  //     await db.cart.upsert({
+  //       where: {
+  //         userId,
+  //       },
+  //       update: {
 
-    // await db.cart.upsert({
-    //   where: {
-    //     userId,
-    //   },
-    //   update: {
-
-  	// },
-    //   create: {},
-    // });
+  //   	},
+  //       create: {},
+  //     });
 };
 
 export default addToCart;
