@@ -26,15 +26,30 @@ export const getMyCart = async () => {
 const addToCart = async (id: number) => {
   const userId = await getUser();
 
-  //     await db.cart.upsert({
-  //       where: {
-  //         userId,
-  //       },
-  //       update: {
-
-  //   	},
-  //       create: {},
-  //     });
+  await db.cart.upsert({
+    where: {
+      userId,
+    },
+    update: {
+      product: {
+        connect: {
+          id,
+        },
+      },
+    },
+    create: {
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+      product: {
+        connect: {
+          id,
+        },
+      },
+    },
+  });
 };
 
 export default addToCart;
