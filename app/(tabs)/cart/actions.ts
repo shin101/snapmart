@@ -23,6 +23,7 @@ export const getMyCart = async () => {
   return myItems;
 };
 
+
 const addToCart = async (id: number) => {
   const userId = await getUser();
 
@@ -51,5 +52,27 @@ const addToCart = async (id: number) => {
     },
   });
 };
+
+export const removeItem = async () => {
+	console.log('deleting')
+	// await db.cart.delete({
+	// 	where: {
+	// 	  id
+	// 	},
+	// 	select:{
+	// 		product
+	// 	}
+	//   });
+	// const userId = await getUser();
+	// const myItems = await db.cart.findUnique({
+	//   where: {
+	// 	userId,
+	//   },
+	//   include: {
+	// 	product: true,
+	//   },
+	// });
+	// return myItems;
+  };
 
 export default addToCart;

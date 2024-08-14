@@ -1,10 +1,60 @@
+"use client";
+
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { getMyCart } from "./actions";
+import { getMyCart, removeItem } from "./actions";
+import { useEffect, useState } from "react";
 
-const Cart = async () => {
-  const myItems = await getMyCart();
-  const products = myItems?.product;
+type MyItemsType = {
+  id: number;
+  userId: number;
+  created_at: Date;
+  updated_at: Date;
+  product: {
+    id: number;
+    title: string;
+    price: number;
+    description: string;
+    photo: string;
+    created_at: Date;
+    updated_at: Date;
+    userId: number;
+    cartId: number | null;
+  }[];
+} | null;
+
+type ProductType =
+  | {
+      id: number;
+      title: string;
+      price: number;
+      description: string;
+      photo: string;
+      created_at: Date;
+      updated_at: Date;
+      userId: number;
+      cartId: number | null;
+    }[]
+  | null;
+
+const handleRemove = async () => {
+  await removeItem();
+};
+
+const Cart = () => {
+  const [myItems, setMyItems] = useState<MyItemsType>(null);
+  const [products, setProducts] = useState<ProductType>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getMyCart();
+      setMyItems(res);
+      if (res && res.product) {
+        setProducts(res.product);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="p-4">
@@ -108,12 +158,12 @@ const Cart = async () => {
                       ${product.price}
                     </td>
                     <td className="px-6 py-4">
-                      <a
-                        href="#"
+                      <button
                         className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                        onClick={handleRemove}
                       >
                         Remove
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 ))}
