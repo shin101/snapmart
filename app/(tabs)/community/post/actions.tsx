@@ -2,7 +2,10 @@
 
 import db from "@/lib/db";
 import { getSession } from "@/lib/session";
+import { Prisma } from "@prisma/client";
 import { z } from "zod";
+
+
 
 const formSchema = z.object({
   title: z.string().min(2),
@@ -44,5 +47,79 @@ const createNewPost = async (formData: FormData) => {
     }
   }
 };
+
+
+export async function getInitialPosts() {
+  const posts = await db.post.findMany({
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      views: true,
+      created_at: true,
+	  updated_at:true,
+	  userId:true,
+      user: true,
+      _count: {
+        select: {
+          comments: true,
+          likes: true,
+        },
+      },
+    },
+    take: 8,
+    orderBy: {
+      created_at: "desc",
+    },
+  });
+  return posts;
+}
+
+export const getMorePosts = async (page: number) => {
+	const posts = await db.post.findMany({
+		select: {
+			id: true,
+			title: true,
+			description: true,
+			views: true,
+			created_at: true,
+			updated_at:true,
+			userId:true,
+			user: true,
+			_count: {
+			  select: {
+				comments: true,
+				likes: true,
+			  },
+			},
+		  },
+	  skip: page * 8,
+	  take: 5,
+	  orderBy: {
+		created_at: "desc",
+	  },
+	});
+	return posts;
+  };
+
+// export async function getPosts() {
+//   const posts = await db.post.findMany({
+//     select: {
+//       id: true,
+//       title: true,
+//       description: true,
+//       views: true,
+//       created_at: true,
+//       user: true,
+//       _count: {
+//         select: {
+//           comments: true,
+//           likes: true,
+//         },
+//       },
+//     },
+//   });
+//   return posts;
+// }
 
 export default createNewPost;

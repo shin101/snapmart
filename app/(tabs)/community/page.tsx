@@ -1,3 +1,5 @@
+"use client";
+
 import db from "@/lib/db";
 import { formatToTimeAgo } from "@/lib/utils";
 import {
@@ -6,39 +8,67 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../public/text-logo.png";
+import { unstable_cache } from "next/cache";
 import { Header } from "@/components/header";
+import { useEffect, useRef, useState } from "react";
+import { getInitialPosts, getMorePosts } from "./post/actions";
+import { Post, Prisma } from "@prisma/client";
 
-async function getPosts() {
-  const posts = await db.post.findMany({
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      views: true,
-      created_at: true,
-      user: true,
-      _count: {
-        select: {
-          comments: true,
-          likes: true,
-        },
+export default function Community() {
+  const [posts, setPosts] = useState<Post[] | null>(null);
+  const [isLastPage, setIsLastPage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(0);
+  const trigger = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    // cache first eight items later
+    async function firstEight() {
+      const res = await getInitialPosts();
+      setPosts(res);
+    }
+    firstEight();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      async (
+        entries: IntersectionObserverEntry[],
+        observer: IntersectionObserver
+      ) => {
+        const element = entries[0];
+        if (element.isIntersecting && trigger.current) {
+          observer.unobserve(trigger.current);
+          setIsLoading(true);
+          const newPosts = await getMorePosts(page + 1);
+
+          if (newPosts.length !== 0) {
+            setPage((prev) => prev + 1);
+            setPosts((prev) => (prev ? [...prev, ...newPosts] : [...newPosts]));
+          } else {
+            setIsLastPage(true);
+          }
+          setIsLoading(false);
+        }
       },
-    },
-  });
-  return posts;
-}
+      {
+        threshold: 0.5,
+      }
+    );
 
-export const metadata = {
-  title: "Community",
-};
+    if (trigger.current) {
+      observer.observe(trigger.current);
+    }
 
-export default async function Community() {
-  const posts = await getPosts();
+    return () => {
+      observer.disconnect();
+    };
+  }, [trigger.current, page]);
+
   return (
     <div className="">
       <Header text={"Post"} link={"/community/post"} />
-      {posts.length != 0 ? (
+      {posts && posts.length != 0 ? (
         <div className="flex flex-col ">
           {posts.map((post) => (
             <Link href={`/community/${post.id}`} key={post.id}>
@@ -85,7 +115,16 @@ export default async function Community() {
               </div>
             </Link>
           ))}
-		  ADD INFINITE SCROLL FEATURE HERE LATER
+
+          {!isLastPage ? (
+            <span
+              ref={trigger}
+              style={{ marginTop: `${page + 1 * 10}vh` }}
+              className="mb-96 text-sm font-semibold bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-purple-400 rounded-md w-fit mx-auto px-3 "
+            >
+              {isLoading ? "Loading..." : "Load more"}
+            </span>
+          ) : null}
         </div>
       ) : (
         <div>There are no posts here! Be the first to create one.</div>

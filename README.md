@@ -19,3 +19,4 @@ https://snapmart-mu.vercel.app
 - can use useOptimistic to improve comments for different posts #14.5 vid
 - make default text color gray
 - making a community post seems to not work 
+- cache first 8 community posts
