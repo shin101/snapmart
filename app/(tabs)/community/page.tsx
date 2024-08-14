@@ -12,10 +12,27 @@ import { unstable_cache } from "next/cache";
 import { Header } from "@/components/header";
 import { useEffect, useRef, useState } from "react";
 import { getInitialPosts, getMorePosts } from "./post/actions";
-import { Post, Prisma } from "@prisma/client";
+
+type PostType = {
+  id: number;
+  title: string;
+  description: string;
+  views: number;
+  created_at: Date;
+  updated_at: Date;
+  userId: number;
+  user: {
+    username: string;
+    avatar: string | null;
+  };
+  _count: {
+    comments: number;
+    likes: number;
+  };
+};
 
 export default function Community() {
-  const [posts, setPosts] = useState<Post[] | null>(null);
+  const [posts, setPosts] = useState<PostType[] | null>(null);
   const [isLastPage, setIsLastPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);

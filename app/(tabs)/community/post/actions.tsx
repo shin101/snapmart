@@ -2,7 +2,6 @@
 
 import db from "@/lib/db";
 import { getSession } from "@/lib/session";
-import { Prisma } from "@prisma/client";
 import { z } from "zod";
 
 
@@ -59,7 +58,11 @@ export async function getInitialPosts() {
       created_at: true,
 	  updated_at:true,
 	  userId:true,
-      user: true,
+	  user: {
+        select: {
+          username: true,
+          avatar: true,
+        }},
       _count: {
         select: {
           comments: true,
