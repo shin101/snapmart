@@ -37,13 +37,14 @@ type ProductType =
     }[]
   | null;
 
-const handleRemove = async () => {
-  await removeItem();
+const handleRemove = async (productId:number) => {
+  await removeItem(productId);
 };
 
 const Cart = () => {
   const [myItems, setMyItems] = useState<MyItemsType>(null);
   const [products, setProducts] = useState<ProductType>(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,11 +55,12 @@ const Cart = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [products]);
+
 
   return (
     <div className="p-4">
-      {myItems ? (
+      {myItems?.product.length!==0 ? (
         <div>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -160,7 +162,7 @@ const Cart = () => {
                     <td className="px-6 py-4">
                       <button
                         className="font-medium text-red-600 dark:text-red-500 hover:underline"
-                        onClick={handleRemove}
+                        onClick={() => handleRemove(product.id)}
                       >
                         Remove
                       </button>
