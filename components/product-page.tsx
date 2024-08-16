@@ -12,7 +12,7 @@ interface ProductPageProps {
 export const ProductPage = ({ initialProducts }: ProductPageProps) => {
   const [products, setProducts] = useState(initialProducts);
   const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [isLastPage, setIsLastPage] = useState(false);
   const trigger = useRef<HTMLSpanElement>(null);
   useEffect(() => {

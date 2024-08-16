@@ -70,7 +70,7 @@ export async function getInitialPosts() {
         },
       },
     },
-    take: 8,
+    take: 4,
     orderBy: {
       created_at: "desc",
     },
@@ -96,8 +96,8 @@ export const getMorePosts = async (page: number) => {
 			  },
 			},
 		  },
-	  skip: page * 8,
-	  take: 5,
+	  skip: page * 4,
+	  take: 4,
 	  orderBy: {
 		created_at: "desc",
 	  },

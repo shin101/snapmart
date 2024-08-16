@@ -1,6 +1,6 @@
 "use client";
 
-import db from "@/lib/db";
+import { Pagination } from "flowbite-react";
 import { formatToTimeAgo } from "@/lib/utils";
 import {
   ChatBubbleBottomCenterIcon,
@@ -37,50 +37,23 @@ export default function Community() {
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
   const trigger = useRef<HTMLSpanElement>(null);
+  const onPageChange = (page: number) => {
+    setPage(page);
+    const pagePosts = async () => {
+      const res = await getMorePosts(page);
+    };
+    pagePosts();
+  };
 
   useEffect(() => {
-    // cache first eight items later
-    async function firstEight() {
-      const res = await getInitialPosts();
+    async function renderFourPosts() {
+      const res = await getMorePosts(page);
       setPosts(res);
     }
-    firstEight();
-  }, []);
+    renderFourPosts();
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      async (
-        entries: IntersectionObserverEntry[],
-        observer: IntersectionObserver
-      ) => {
-        const element = entries[0];
-        if (element.isIntersecting && trigger.current) {
-          observer.unobserve(trigger.current);
-          setIsLoading(true);
-          const newPosts = await getMorePosts(page + 1);
+  }, [page]);
 
-          if (newPosts.length !== 0) {
-            setPage((prev) => prev + 1);
-            setPosts((prev) => (prev ? [...prev, ...newPosts] : [...newPosts]));
-          } else {
-            setIsLastPage(true);
-          }
-          setIsLoading(false);
-        }
-      },
-      {
-        threshold: 0.5,
-      }
-    );
-
-    if (trigger.current) {
-      observer.observe(trigger.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [trigger.current, page]);
 
   return (
     <div className="">
@@ -133,15 +106,13 @@ export default function Community() {
             </Link>
           ))}
 
-          {!isLastPage ? (
-            <span
-              ref={trigger}
-              style={{ marginTop: `${page + 1 * 10}vh` }}
-              className="mb-96 text-sm font-semibold bg-gradient-to-tr from-pink-100 via-white to-purple-200 border border-purple-400 rounded-md w-fit mx-auto px-3 "
-            >
-              {isLoading ? "Loading..." : "Load more"}
-            </span>
-          ) : null}
+          <div className="flex overflow-x-auto sm:justify-center mt-16">
+            <Pagination
+              currentPage={page}
+              totalPages={50}
+              onPageChange={onPageChange}
+            />
+          </div>
         </div>
       ) : (
         <div>There are no posts here! Be the first to create one.</div>
